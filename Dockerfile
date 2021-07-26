@@ -2,14 +2,17 @@
 
 FROM node:14.17.3
 
-ENV NODE_ENV=production
+RUN mkdir /usr/src/backend/
 
-WORKDIR /backend
+COPY . /usr/src/backend/
 
+WORKDIR /usr/src/backend
 
+COPY /backend/package.json ./
+COPY package-lock.json ./
 
-RUN npm install --production
+RUN npm install
 
-COPY . .
+COPY ./backend .
 
 CMD ["npm", "start"]
