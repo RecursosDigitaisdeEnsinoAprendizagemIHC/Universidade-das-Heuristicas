@@ -1,27 +1,16 @@
 {
-  "name": "universidade-das-heuristicas",
-  "version": "1.0.0",
-  "description": "Reposítorio para desenvolvimento de TCC2 com tema de Heurísiticas de Nielsen",
-  "main": "index.js",
+  "name": "backend",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "nodemon ./bin/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lucasmidlhey/Universidade-das-Heuristicas.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lucasmidlhey/Universidade-das-Heuristicas/issues"
-  },
-  "homepage": "https://github.com/lucasmidlhey/Universidade-das-Heuristicas#readme",
-  "dependencies" : {
-    "body-parser" : "1.19.0",
-    "config" : "3.3.6",
-    "express": "4.17.1",
-    "nodemon": "2.0.12"
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1"
   }
 }
-
