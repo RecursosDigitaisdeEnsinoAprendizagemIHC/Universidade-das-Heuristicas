@@ -1,10 +1,13 @@
 FROM node:14.17.5
 
-WORKDIR /usr/src/app
+Run mkdir -p /app/backend
+
+WORKDIR /app/backend
 
 COPY package*.json ./
 
 RUN npm install
+RUN apt-get update && apt-get install -y postgresql-client
 
 COPY . .
 

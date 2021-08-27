@@ -1,19 +1,44 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=rwdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres 
+
   backend:
+    image: backend
+    container_name: backend
     build:
       context: ./backend
       dockerfile: ./Dockerfile
-    image: "universidade-das-heuristicas:backend"
     ports:
       - "8080:8080"
+    volumes:
+      - .:/backend
+      - node_modules:/backend/node_modules
+    links:
+      - postgres
+
   frontend:
+    image: frontend
+    container_name: frontend
     build:
       context: ./frontend
       dockerfile: ./Dockerfile
-    image: "universidade-das-heuristicas:frontend"
     ports:
       - "3000:3000"
+    volumes:
+      - ./frontend/:/frontend
+    entrypoint: "tail -f /dev/null"
     links:
-      - "backend"
+      - backend
+
+volumes:
+  postgres_data:
+  node_modules:
