@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'PressStart2P';
+  src: local('PressStart2P'),
+    url(./fonts/PressStart2P-Regular.ttf) format('truetype');
+}
+
+* {
+  font-family: 'PressStart2P', serif;
+}
+
+.container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
