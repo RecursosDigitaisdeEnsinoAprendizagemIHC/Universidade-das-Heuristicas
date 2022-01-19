@@ -1,0 +1,21 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "heuristica",
+    "password": "heuristica",
+    "database": "heuristica",
+    "options": {
+      "trustServerCertificate": true
+    },
+    "logging": false,
+    "entities": ["core/database/entity/**/*{.ts,.js}"],
+    "migrations": ["core/database/migration/**/*{.ts,.js}"],
+    "subscribers": ["core/database/subscriber/**/*{.ts,.js}"],
+    "cli": {
+      "entitiesDir": "core/database/entity",
+      "migrationsDir": "core/database/migration",
+      "subscribersDir": "core/database/subscriber"
+    }
+  }
+  
