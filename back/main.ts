@@ -9,5 +9,5 @@ export async function main() {
   const listener = app.listen(() => { });
 
   // @ts-ignore
-  console.log(`⚡️[server]: Server is running at https://localhost:${listener.address()?.port}`);
+  console.log(`⚡️[server]: Server is running at http://localhost:${listener.address()?.port}`);
 }

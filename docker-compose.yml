@@ -1,10 +1,49 @@
 version: "3"
+
+networks:
+  heuristica-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
+
 services:
   postgres:
     image: "postgres:9.6.1"
+    user: "1000:1000"
+    container_name: postgres
+    tty: true
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: "heuristica"
       POSTGRES_PASSWORD: "heuristica"
       POSTGRES_DB: "heuristica"
+    volumes:
+      - ./_docker/db/postgres:/var/lib/postgresql/data
+    networks:
+      - heuristica-network
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    tty: true
+    ports:
+      - 8081:8080
+    networks:
+      - heuristica-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    tty: true
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "postgres"
+      PGADMIN_DEFAULT_PASSWORD: "postgres"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres
+    networks:
+      - heuristica-network
