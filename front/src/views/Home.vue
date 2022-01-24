@@ -1,13 +1,31 @@
 <template>
   <div class="container">
-    <h1>TESTE</h1>
-    <div v-for="a in list" :key="a">
-      <p>{{ a }}</p>
+    <h1 class="title mb-20">Universidade das Heurísticas</h1>
+    <div class="flex items-center justify-around w-full">
+      <div>
+        <img
+          src="../assets/imgs/placeholder_1.png"
+          alt="placeholder"
+          srcset=""
+        />
+      </div>
+      <div
+        @click="$router.push('/game-options')"
+        class="
+          flex
+          items-center
+          cursor-pointer
+          hover:animate-pulse hover:shadow-xl;
+        "
+      >
+        <h1>Dê o play</h1>
+        <div class="pl-4">
+          <font-awesome-icon icon="play" size="4x" class="text-blue-800" />
+        </div>
+      </div>
     </div>
-    <type-writer text="Hello World! I was registered globally!"></type-writer>
+    <!-- <type-writer text="Hello World! I was registered globally!"></type-writer> -->
   </div>
-
-  <button @click="$router.push('/pagetwo')">Go back</button>
 </template>
 <script lang="ts">
 import { computed, ref, defineComponent } from '@vue/runtime-core'
@@ -25,24 +43,8 @@ export default defineComponent({
   },
 })
 </script>
-<style scoped lang="scss">
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 60px;
-  text-align: center;
-}
-.creator {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-decoration: none;
-  color: black;
-}
-.icon {
-  color: white;
+<style scoped lang="postcss">
+h1 {
+  @apply text-2xl text-blue-800;
 }
 </style>

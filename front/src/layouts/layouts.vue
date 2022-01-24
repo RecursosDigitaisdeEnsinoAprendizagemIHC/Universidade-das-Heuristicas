@@ -10,5 +10,6 @@
   @apply my-10 mx-10;
   @apply border-opacity-100 border-8 border-black rounded-3xl;
   height: 90vh;
+  padding: 0.5em;
 }
 </style>
