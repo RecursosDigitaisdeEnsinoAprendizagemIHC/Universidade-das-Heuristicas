@@ -1,8 +1,10 @@
+import { ParticipanteInterface } from './../typings/Types';
+import { State } from './index';
 import { ActionContext } from 'vuex'
 
-export const GameStore = {
+export const GameStore: { state: State, getters: any, actions: any, mutations: any } = {
   state: {
-    hasItens: false,
+    participante: null,
   },
   getters: {
     // getAuth(state: Auth): boolean {
@@ -15,8 +17,14 @@ export const GameStore = {
     // },
   },
   mutations: {
-    // changeAuth(state: Auth, data: boolean): void {
-    //   state.loggedIn = data
-    // },
+    createParticipante(state: State, payload: ParticipanteInterface) {
+      state.participante = {
+        id: null,
+        nome: payload.nome,
+        pontos: 0,
+        questoes: 0,
+        avatar: payload.avatar
+      }
+    }
   },
 }

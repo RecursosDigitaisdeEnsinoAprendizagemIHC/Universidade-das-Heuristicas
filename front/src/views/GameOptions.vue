@@ -15,15 +15,40 @@
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script lang="ts">
+import { computed, ref, defineComponent } from '@vue/runtime-core'
+import { useStore } from '../store/index'
+
+export default defineComponent({
+  name: 'GameOptions',
+  setup() {
+    const store = useStore()
+    const participante = {}
+    console.log(store.state.participante)
+    if (store.state.participante == null) {
+      // TODO - prompt telinha, salvar nome e avatar
+      store.commit({ type: 'createParticipante', ...participante })
+    }
+    console.log(store.state.participante)
+    const rankingList = ref<any[]>()
+
+    return {}
+  },
+})
+</script>
 <style scoped lang="postcss">
 .bg-option {
-  @apply text-2xl bg-blue-800 text-white w-1/2 h-1/2;
+  @apply text-2xl bg-blue-800 text-white;
   @apply flex items-center;
   @apply rounded-2xl cursor-pointer;
   @apply hover:animate-pulse hover:shadow-xl;
-}
-p {
-  @apply m-auto;
+  transform: rotate(45deg);
+  p {
+    @apply m-auto;
+    transform: rotate(-45deg);
+  }
+
+  height: 200px;
+  width: 200px;
 }
 </style>
