@@ -1,9 +1,5 @@
 <template>
-  <!-- TODO - criar componente p + div -->
-  <p class="text-blue-800 text-base">Universidade das Heurísticas - Ranking</p>
-  <div class="mt-10 cursor-pointer" @click="$router.push('/game-options')">
-    - voltar
-  </div>
+  <sub-header title="Ranking"></sub-header>
 
   <div class="container">
     <div class="ranking w-full">
@@ -16,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="participante of rankingList" :key="participante.id">
+          <tr v-for="participante of rankingList" :key="participante.id + 1">
             <td>{{ participante.nome }}</td>
             <td>{{ participante.pontos }}</td>
             <td>{{ participante.questoes }}</td>
@@ -27,32 +23,20 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, ref, defineComponent } from '@vue/runtime-core'
+import { computed, ref, defineComponent, onMounted } from '@vue/runtime-core'
+import { ParticipanteInterface } from '../typings/Types'
+import { useStore } from '../store/index'
 
 export default defineComponent({
   name: 'Ranking',
   setup() {
-    const alunos = [
-      {
-        id: 1,
-        nome: 'Participante 1',
-        pontos: 10,
-        questoes: 2,
-      },
-      {
-        id: 2,
-        nome: 'Participante 2',
-        pontos: 30,
-        questoes: 7,
-      },
-      {
-        id: 3,
-        nome: 'Participante 3',
-        pontos: 2,
-        questoes: 1,
-      },
-    ]
-    const rankingList = ref<any[]>([...alunos])
+    const rankingList = ref<ParticipanteInterface[]>([])
+    const store = useStore()
+
+    onMounted(async () => {
+      const alunos = await store.getters.getRankingList
+      rankingList.value = alunos
+    })
 
     return {
       rankingList,

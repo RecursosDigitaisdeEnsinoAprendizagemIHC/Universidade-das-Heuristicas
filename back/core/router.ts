@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { baseRouter } from './routes/baseRouter'
+import { router } from './routes/routes'
 
 export const appRouter = Router();
 
-appRouter.use('/', baseRouter)
+appRouter.use('/', router)

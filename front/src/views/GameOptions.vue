@@ -3,7 +3,7 @@
 
   <div class="container">
     <div class="flex w-full justify-around h-1/4 space-x-20">
-      <div class="bg-option" @click="$router.push('/game-options')">
+      <div class="bg-option" @click="openPopUp">
         <p>Jogar</p>
       </div>
       <div class="bg-option" @click="$router.push('/ranking')">
@@ -13,26 +13,27 @@
         <p>Sobre<br />Nós</p>
       </div>
     </div>
+    <avatar-pop-up :jogar="isJogar"></avatar-pop-up>
   </div>
 </template>
 <script lang="ts">
 import { computed, ref, defineComponent } from '@vue/runtime-core'
+import AvatarPopUp from '../components/AvatarPopUp.vue'
 import { useStore } from '../store/index'
 
 export default defineComponent({
+  components: { AvatarPopUp },
   name: 'GameOptions',
   setup() {
     const store = useStore()
     const participante = {}
-    console.log(store.state.participante)
-    if (store.state.participante == null) {
-      // TODO - prompt telinha, salvar nome e avatar
-      store.commit({ type: 'createParticipante', ...participante })
-    }
-    console.log(store.state.participante)
-    const rankingList = ref<any[]>()
+    const isJogar = ref<boolean>(false)
 
-    return {}
+    const openPopUp = () => {
+      isJogar.value = true
+    }
+
+    return { isJogar, openPopUp }
   },
 })
 </script>

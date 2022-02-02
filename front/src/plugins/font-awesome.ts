@@ -1,6 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
-const appIcons = [faPlay]
+const appIcons = [faPlay, faArrowCircleLeft]
 
 library.add(...appIcons)
+

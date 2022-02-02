@@ -1,6 +1,8 @@
 <template>
-  <h1>Sobre Nós</h1>
+  <sub-header title="Sobre Nós"></sub-header>
 
-  <button @click="$router.push('/')">Voltar</button>
+  <div class="container">
+    <h1>Página Sobre Nós</h1>
+  </div>
 </template>
 <script setup lang="ts"></script>
