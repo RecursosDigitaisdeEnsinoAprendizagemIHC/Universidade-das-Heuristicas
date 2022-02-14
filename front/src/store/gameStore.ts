@@ -18,21 +18,30 @@ export const GameStore: { state: State, getters: any, actions: any, mutations: a
     //   context.commit('changeAuth', data)
     // },
 
-    criarParticipante({ commit, state }: ActionContext<State, State>, payload: { nome: string, avatar: string }) {
-      // TODO criar no banco (async ) e depois das o commit
-      commit({ type: 'criarParticipante', ...payload })
-    }
-  },
-  mutations: {
-    criarParticipante(state: State, payload: { nome: string, avatar: string }) {
-      state.participante = {
+    async criarParticipante({ commit, state }: ActionContext<State, State>, payload: { nome: string, avatar: string }) {
+      const participante = {
         id: -1,
         nome: payload.nome,
         pontos: 0,
         questoes: 0,
         avatar: payload.avatar
       }
-      console.log('criado', state.participante)
+      // TODO criar no banco (async ) e depois das o commit
+      const result = await apiClient.post('/create-user', participante)
+      if (result.data) {
+        commit({ type: 'criarParticipante', ...participante })
+      }
+    }
+  },
+  mutations: {
+    criarParticipante(state: State, payload: ParticipanteInterface) {
+      state.participante = {
+        id: payload.id,
+        nome: payload.nome,
+        pontos: payload.pontos,
+        questoes: payload.questoes,
+        avatar: payload.avatar
+      }
     }
   },
 }

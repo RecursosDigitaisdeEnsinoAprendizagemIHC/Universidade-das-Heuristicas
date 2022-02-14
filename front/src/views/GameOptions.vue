@@ -17,7 +17,7 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, ref, defineComponent } from '@vue/runtime-core'
+import { defineComponent, ref } from '@vue/runtime-core'
 import AvatarPopUp from '../components/AvatarPopUp.vue'
 import { useStore } from '../store/index'
 
@@ -26,7 +26,6 @@ export default defineComponent({
   name: 'GameOptions',
   setup() {
     const store = useStore()
-    const participante = {}
     const isJogar = ref<boolean>(false)
 
     const openPopUp = () => {

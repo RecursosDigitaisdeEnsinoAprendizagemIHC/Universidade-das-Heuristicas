@@ -24,7 +24,6 @@
         </div>
       </div>
     </div>
-    <!-- <type-writer text="Hello World! I was registered globally!"></type-writer> -->
   </div>
 </template>
 <script lang="ts">

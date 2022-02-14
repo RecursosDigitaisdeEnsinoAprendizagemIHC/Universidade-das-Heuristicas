@@ -11,7 +11,7 @@ volumes:
 services:
   postgres:
     image: "postgres:9.6.1"
-    #user: "1000:1000"
+    # user: "1000:1000"
     container_name: postgres
     tty: true
     ports:

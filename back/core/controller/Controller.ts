@@ -7,7 +7,7 @@ class Controller {
     // getDbConnection()
   }
 
-  getRankingList(req: Request, res: Response) {
+  async getRankingList(req: Request, res: Response) {
     const alunos = [
       {
         id: 1,
@@ -29,6 +29,16 @@ class Controller {
       },
     ]
     res.json(alunos)
+  }
+
+
+  async createUser(req: Request, res: Response) {
+    const user = req.body
+
+    // TODO - add no banco, retornar o resultado
+    console.log(user)
+
+    res.send(true)
   }
 }
 

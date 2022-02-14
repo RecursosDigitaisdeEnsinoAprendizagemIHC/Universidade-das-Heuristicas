@@ -35,7 +35,7 @@
 <script lang="ts">
 import { defineComponent, onUpdated, ref } from '@vue/runtime-core'
 import { useStore } from '../store/index'
-import { ParticipanteInterface } from '../typings/Types'
+import { useRouter, useRoute } from 'vue-router'
 
 export default defineComponent({
   name: 'AvatarPopUp',
@@ -48,6 +48,7 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore()
+    const router = useRouter()
 
     const popUp = ref<HTMLElement | null>(null)
     const avatarF = ref<HTMLElement | null>(null)
@@ -83,6 +84,7 @@ export default defineComponent({
       }
       if (store.state.participante == null) {
         store.dispatch({ type: 'criarParticipante', ...participante })
+        router.push('/game-welcome')
       }
     }
 

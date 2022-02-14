@@ -2,6 +2,7 @@ export interface ParticipanteInterface {
   id: number
   nome: string
   pontos: number
-  questoes: number
+  questoesCertas: number
+  questoesTentadas: number
   avatar: string
 }
