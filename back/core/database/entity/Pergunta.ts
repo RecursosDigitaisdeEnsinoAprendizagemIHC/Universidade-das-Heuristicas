@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { RespostaMultiplaEscolha } from './RespostaMultiplaEscolha';
+import { RespostaVF } from './RespostaVF';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { Fase } from './Fase';
 
 @Entity('pergunta')
@@ -40,5 +42,13 @@ export class Pergunta {
   @ManyToOne(type => Fase, fase => fase.perguntas)
   @JoinColumn()
   fase!: Fase;
+
+  @OneToOne(() => RespostaVF)
+  @JoinColumn()
+  respostaVF!: RespostaVF;
+
+  @OneToOne(() => RespostaMultiplaEscolha)
+  @JoinColumn()
+  respostaMultiplaEscolha!: RespostaVF;
 
 }
