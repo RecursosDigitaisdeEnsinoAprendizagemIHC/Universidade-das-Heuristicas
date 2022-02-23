@@ -1,8 +1,16 @@
-export interface ParticipanteInterface {
-  id: number
+export interface JogadorInterface {
+  idJogador: number
   nome: string
-  pontos: number
+  pontuacaoTotal: number
   questoesCertas: number
   questoesTentadas: number
-  avatar: string
+  imagemPersonagem: string
+}
+
+export interface FasesInterface {
+  idFase: number
+  nome: string
+  descricao: string
+  dificuldade: number
+  minPontuacao: number
 }

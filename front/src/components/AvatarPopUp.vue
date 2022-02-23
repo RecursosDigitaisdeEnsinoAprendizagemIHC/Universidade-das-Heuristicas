@@ -14,14 +14,14 @@
       />
       <div class="flex justify-around mt-4 mb-8">
         <img
-          src="../assets/imgs/avatar.png"
-          alt="avatar1"
+          src="../assets/imgs/avatar-feminino.png"
+          alt="avatar-feminino"
           ref="avatarF"
           @click="trocaAvatar('F', $event)"
         />
         <img
-          src="../assets/imgs/avatar.png"
-          alt="avatar2"
+          src="../assets/imgs/avatar-masculino.png"
+          alt="avatar-masculino"
           ref="avatarM"
           @click="trocaAvatar('M', $event)"
         />

@@ -4,7 +4,7 @@
     <div class="flex items-center justify-around w-full">
       <div>
         <img
-          src="../assets/imgs/placeholder_1.png"
+          src="../assets/imgs/home-page-image.png"
           alt="placeholder"
           srcset=""
         />

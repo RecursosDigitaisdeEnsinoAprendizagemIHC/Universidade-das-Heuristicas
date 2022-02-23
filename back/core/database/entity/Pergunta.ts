@@ -1,10 +1,10 @@
 import { RespostaMultiplaEscolha } from './RespostaMultiplaEscolha';
 import { RespostaVF } from './RespostaVF';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne, BaseEntity } from 'typeorm';
 import { Fase } from './Fase';
 
 @Entity('pergunta')
-export class Pergunta {
+export class Pergunta extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   idPergunta!: number;
@@ -29,9 +29,9 @@ export class Pergunta {
 
   @Column({
     type: "bytea",
-    nullable: false
+    nullable: true
   })
-  imagem!: Buffer;
+  imagem?: Buffer;
 
   @Column({
     type: "boolean",

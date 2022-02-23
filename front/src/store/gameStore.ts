@@ -1,47 +1,82 @@
-import { ParticipanteInterface } from './../typings/Types';
+import { ActionContext, ActionPayload, GetterTree, MutationPayload } from 'vuex';
+import apiClient from '../plugins/https';
+import { FasesInterface, JogadorInterface } from './../typings/Types';
 import { State } from './index';
-import { ActionContext } from 'vuex'
-import apiClient from '../plugins/https'
 
-export const GameStore: { state: State, getters: any, actions: any, mutations: any } = {
+
+export const GameStore: { state: State, getters: GetterTree<State, State>, actions: any, mutations: any } = {
   state: {
-    participante: null,
+    // TODO - set participante to null
+    jogador: {
+      idJogador: 0,
+      imagemPersonagem: 'M',
+      nome: 'abc',
+      pontuacaoTotal: 0,
+      questoesCertas: 0,
+      questoesTentadas: 0,
+    },
+    fases: [],
+    currentFase: null
   },
   getters: {
-    async getRankingList(): Promise<ParticipanteInterface[]> {
-      const result = await apiClient.get<ParticipanteInterface[]>('/ranking-list')
-      return result.data
-    },
   },
   actions: {
     // changeAuth(context: ActionContext<Auth, Auth>, data: boolean): void {
     //   context.commit('changeAuth', data)
     // },
+    async getRankingList({ commit, state }: ActionContext<State, State>): Promise<JogadorInterface[]> {
+      const result = await apiClient.get<JogadorInterface[]>('/ranking-list')
+      return result.data
+    },
+    async getFases({ commit, state }: ActionContext<State, State>): Promise<FasesInterface[]> {
+      const result = await apiClient.get<FasesInterface[]>('/get-fases')
+      const fases = result.data
+      commit({ type: 'setFase', fases })
+      return result.data
+    },
+
+    async setCurrentFase({ commit, state }: ActionContext<State, State>, { payload }: ActionPayload): Promise<void> {
+      commit({ type: 'setCurrentFase', payload })
+    },
 
     async criarParticipante({ commit, state }: ActionContext<State, State>, payload: { nome: string, avatar: string }) {
-      const participante = {
-        id: -1,
+      const participante: JogadorInterface = {
+        idJogador: -1,
         nome: payload.nome,
-        pontos: 0,
-        questoes: 0,
-        avatar: payload.avatar
+        pontuacaoTotal: 0,
+        questoesCertas: 0,
+        questoesTentadas: 0,
+        imagemPersonagem: payload.avatar
       }
-      // TODO criar no banco (async ) e depois das o commit
-      const result = await apiClient.post('/create-user', participante)
-      if (result.data) {
-        commit({ type: 'criarParticipante', ...participante })
+
+      try {
+        const result = await apiClient.post<JogadorInterface>('/create-user', participante)
+        if (result.data) {
+          commit({ type: 'criarParticipante', ...result.data })
+        }
+      } catch (error) {
+        throw error
       }
+
     }
   },
   mutations: {
-    criarParticipante(state: State, payload: ParticipanteInterface) {
-      state.participante = {
-        id: payload.id,
+    criarParticipante(state: State, payload: JogadorInterface) {
+      state.jogador = {
+        idJogador: payload.idJogador,
         nome: payload.nome,
-        pontos: payload.pontos,
-        questoes: payload.questoes,
-        avatar: payload.avatar
+        pontuacaoTotal: payload.pontuacaoTotal,
+        questoesTentadas: 0,
+        questoesCertas: 0,
+        imagemPersonagem: payload.imagemPersonagem
       }
+    },
+
+    setFase(state: State, payload: { type: string, fases: FasesInterface[] }) {
+      state.fases = payload.fases
+    },
+    setCurrentFase(state: State, payload: MutationPayload) {
+      state.currentFase = payload.payload
     }
   },
 }

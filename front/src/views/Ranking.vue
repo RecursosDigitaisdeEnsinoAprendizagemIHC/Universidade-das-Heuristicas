@@ -15,7 +15,7 @@
           <tr v-for="participante of rankingList" :key="participante.id + 1">
             <td>{{ participante.nome }}</td>
             <td>{{ participante.pontos }}</td>
-            <td>{{ participante.questoes }}</td>
+            <td>{{ participante.questoesCertas }}</td>
           </tr>
         </tbody>
       </table>
@@ -24,13 +24,13 @@
 </template>
 <script lang="ts">
 import { computed, ref, defineComponent, onMounted } from '@vue/runtime-core'
-import { ParticipanteInterface } from '../typings/Types'
+import { JogadorInterface } from '../typings/Types'
 import { useStore } from '../store/index'
 
 export default defineComponent({
   name: 'Ranking',
   setup() {
-    const rankingList = ref<ParticipanteInterface[]>([])
+    const rankingList = ref<JogadorInterface[]>([])
     const store = useStore()
 
     onMounted(async () => {

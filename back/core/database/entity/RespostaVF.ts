@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, BaseEntity } from 'typeorm';
 import { Fase } from './Fase';
 
 @Entity('resposta_v_f')
-export class RespostaVF {
+export class RespostaVF extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   idRespostaVF!: number;
@@ -18,18 +18,6 @@ export class RespostaVF {
     nullable: false
   })
   chaveResposta!: number;
-
-  @Column({
-    type: 'text',
-    nullable: false
-  })
-  descricaoOpcao1!: string;
-
-  @Column({
-    type: 'text',
-    nullable: false
-  })
-  descricaoOpcao2!: string;
 
   @Column({
     type: 'text',

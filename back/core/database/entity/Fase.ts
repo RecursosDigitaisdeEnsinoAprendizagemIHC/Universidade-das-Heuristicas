@@ -1,5 +1,5 @@
 import { Jogador } from './Jogador';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { Pergunta } from './Pergunta';
 
 @Entity('fase')
@@ -23,9 +23,9 @@ export class Fase {
 
   @Column({
     type: "bytea",
-    nullable: false
+    nullable: true
   })
-  imagem!: Buffer;
+  imagem?: Buffer;
 
   @Column({
     type: 'int',
@@ -39,9 +39,9 @@ export class Fase {
   })
   dificuldade!: number;
 
-  @ManyToOne(type => Jogador, jogador => jogador.fases)
-  @JoinColumn()
-  jogador!: Jogador;
+  @ManyToMany(type => Jogador, jogador => jogador.fases)
+  @JoinTable()
+  jogadores!: Jogador;
 
   @OneToMany(type => Pergunta, pergunta => pergunta.fase)
   perguntas!: Pergunta[];

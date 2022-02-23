@@ -4,6 +4,7 @@ import GameOptions from '../views/GameOptions.vue'
 import Ranking from '../views/Ranking.vue'
 import About from '../views/About.vue'
 import GameWelcome from '../views/GameWelcome.vue'
+import Fases from '../views/Fases.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -31,6 +32,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/game-welcome',
     name: 'GameWelcome',
     component: GameWelcome,
+    // beforeEnter: protectedRoute,
+  },
+  {
+    path: '/fases',
+    name: 'Fases',
+    component: Fases,
     // beforeEnter: protectedRoute,
   },
 ]

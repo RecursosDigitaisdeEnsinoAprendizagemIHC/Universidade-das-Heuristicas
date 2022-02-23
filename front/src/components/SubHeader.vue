@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { computed, ref, defineComponent, onMounted } from '@vue/runtime-core'
-import { ParticipanteInterface } from '../typings/Types'
+import { JogadorInterface } from '../typings/Types'
 import { useStore } from '../store/index'
 
 export default defineComponent({

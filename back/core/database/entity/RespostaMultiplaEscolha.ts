@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, BaseEntity } from 'typeorm';
 import { Fase } from './Fase';
 
 @Entity('resposta_multipla_escolha')
-export class RespostaMultiplaEscolha {
+export class RespostaMultiplaEscolha extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   idRespostaMultiplaEscolha!: number;

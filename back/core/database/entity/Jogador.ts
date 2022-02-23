@@ -1,8 +1,8 @@
 import { Fase } from './Fase';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity, ManyToMany } from 'typeorm';
 
 @Entity('jogador')
-export class Jogador {
+export class Jogador extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   idJogador!: number;
@@ -15,10 +15,10 @@ export class Jogador {
   nome!: string;
 
   @Column({
-    type: "bytea",
+    type: "varchar",
     nullable: false
   })
-  imagemPersonagem!: Buffer;
+  imagemPersonagem!: string;
 
   @Column({
     type: 'numeric',
@@ -26,6 +26,6 @@ export class Jogador {
   })
   pontuacaoTotal!: number;
 
-  @OneToMany(type => Fase, fase => fase.jogador)
+  @ManyToMany(type => Fase, fase => fase.jogadores)
   fases!: Fase[];
 }

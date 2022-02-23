@@ -3,8 +3,16 @@
 
   <div class="container">
     <div class="flex flex-col">
-      <div class="bg-white">
-        <type-writer :text="text"></type-writer>
+      <div>
+        <img
+          src="../assets/imgs/welcome-image.png"
+          alt="welcome-image"
+          srcset=""
+        />
+      </div>
+      <div class="bg-white" style="height: 100px">
+        <!-- TODO  SPEED 70 -->
+        <type-writer :speed="10" :text="text" :goTo="'/fases'"></type-writer>
       </div>
     </div>
   </div>
