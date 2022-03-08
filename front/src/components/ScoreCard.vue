@@ -1,16 +1,5 @@
 <template>
-  <div
-    class="
-      avatar-pop-upa
-      bg-blue-800
-      border
-      rounded-lg
-      absolute
-      top-1
-      right-1
-      text-left
-    "
-  >
+  <div class="score-card">
     <div class="m-2">
       <h3 class="m-2">{{ jogador.nome }}</h3>
       <div class="flex">
@@ -58,7 +47,13 @@ export default defineComponent({
 })
 </script>
 <style scoped lang="postcss">
-.avatar-pop-up {
-  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+.score-card {
+  @apply bg-blue-800
+      border
+      rounded-lg
+      absolute
+      top-1
+      right-1
+      text-left;
 }
 </style>

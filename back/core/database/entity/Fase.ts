@@ -43,6 +43,6 @@ export class Fase {
   @JoinTable()
   jogadores!: Jogador;
 
-  @OneToMany(type => Pergunta, pergunta => pergunta.fase)
+  @OneToMany(type => Pergunta, pergunta => pergunta.fase, { eager: true })
   perguntas!: Pergunta[];
 }

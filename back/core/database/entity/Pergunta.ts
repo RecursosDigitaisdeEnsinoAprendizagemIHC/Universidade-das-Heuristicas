@@ -43,12 +43,12 @@ export class Pergunta extends BaseEntity {
   @JoinColumn()
   fase!: Fase;
 
-  @OneToOne(() => RespostaVF)
+  @OneToOne(() => RespostaVF, { eager: true })
   @JoinColumn()
   respostaVF!: RespostaVF;
 
-  @OneToOne(() => RespostaMultiplaEscolha)
+  @OneToOne(() => RespostaMultiplaEscolha, { eager: true })
   @JoinColumn()
-  respostaMultiplaEscolha!: RespostaVF;
+  respostaMultiplaEscolha!: RespostaMultiplaEscolha;
 
 }

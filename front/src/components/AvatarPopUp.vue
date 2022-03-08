@@ -82,7 +82,7 @@ export default defineComponent({
         avatar: avatar.value,
         nome: nomeParticipante.value,
       }
-      if (store.state.participante == null) {
+      if (store.state.jogador == null) {
         store.dispatch({ type: 'criarParticipante', ...participante })
         router.push('/game-welcome')
       }

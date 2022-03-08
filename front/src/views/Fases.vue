@@ -4,8 +4,7 @@
   <div class="container">
     <div class="flex flex-col w-full">
       <div class="bg relative">
-        <!-- TODO <img src="../assets/imgs/fases-bg.png" alt="welcome-image" srcset="" /> -->
-        <div class="flex justify-evenly mt-56 mb-10">
+        <div class="flex justify-evenly mt-56 mb-10" v-show="!isPergunta">
           <div
             v-for="fase of fasesList"
             :key="fase.idFase"
@@ -26,9 +25,14 @@
             />
           </div>
         </div>
+        <perguntas
+          v-show="isPergunta"
+          class="mt-56 mb-10"
+          :currentFase="currentFase"
+        ></perguntas>
         <score-card></score-card>
       </div>
-      <div class="bg-white" style="height: 100px">
+      <div class="bg-white" style="height: 100px" v-show="!isPergunta">
         <type-writer :speed="70" :text="text"></type-writer>
       </div>
     </div>
@@ -39,7 +43,7 @@ import { defineComponent } from '@vue/runtime-core'
 import { ref, onMounted } from 'vue'
 import ScoreCard from '../components/ScoreCard.vue'
 import { useStore } from '../store/index'
-import { FasesInterface, JogadorInterface } from '../typings/Types'
+import { FasesInterface, PerguntaInterface } from '../typings/Types'
 
 export default defineComponent({
   components: { ScoreCard },
@@ -51,6 +55,8 @@ export default defineComponent({
 
     const fasesList = ref<FasesInterface[]>([])
     const store = useStore()
+    const isPergunta = ref<boolean>(false)
+    const currentFase = ref<FasesInterface | any>({})
 
     let jogador = store.state.jogador
 
@@ -64,10 +70,19 @@ export default defineComponent({
 
       store.dispatch({ type: 'setCurrentFase', payload: fase })
 
-      // TODO - rota pra pagina de fase
+      currentFase.value = store.state.currentFase
+
+      isPergunta.value = true
     }
 
-    return { text, fasesList, jogador, gotToFase }
+    return {
+      text,
+      fasesList,
+      jogador,
+      isPergunta,
+      currentFase,
+      gotToFase,
+    }
   },
 })
 </script>

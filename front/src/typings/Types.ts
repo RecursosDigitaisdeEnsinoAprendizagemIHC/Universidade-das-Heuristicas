@@ -13,4 +13,25 @@ export interface FasesInterface {
   descricao: string
   dificuldade: number
   minPontuacao: number
+  perguntas: PerguntaInterface[]
+}
+
+export interface PerguntaInterface {
+  idPergunta: number
+  titulo: string
+  descricao: string
+  pontuacaoPergunta: number
+  imagem?: Buffer
+  eMultiplaEscolha: boolean
+  fase: FasesInterface
+  respostaVF: RespostaVFInterface
+  respostaMultiplaEscolha: RespostaMultiplaEscolhaInferface
+}
+
+export interface RespostaVFInterface {
+
+}
+
+export interface RespostaMultiplaEscolhaInferface {
+
 }
