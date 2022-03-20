@@ -29,10 +29,10 @@ const perguntasFase1: Partial<Pergunta>[] = [
     eMultiplaEscolha: false,
   },
   {
-    idPergunta: 0,
-    titulo: 'Pergunta 1',
-    descricao: 'Descrição da Pergunta 1',
-    pontuacaoPergunta: 5,
+    idPergunta: 1,
+    titulo: '2ª Pergunta',
+    descricao: 'Desc da pergunta  2',
+    pontuacaoPergunta: 15,
     eMultiplaEscolha: false,
   },
 ]

@@ -6,15 +6,7 @@ import { State } from './index';
 
 export const GameStore: { state: State, getters: GetterTree<State, State>, actions: any, mutations: any } = {
   state: {
-    // TODO - set participante to null
-    jogador: {
-      idJogador: 0,
-      imagemPersonagem: 'M',
-      nome: 'abc',
-      pontuacaoTotal: 0,
-      questoesCertas: 0,
-      questoesTentadas: 0,
-    },
+    jogador: null,
     fases: [],
     currentFase: null
   },
@@ -37,6 +29,20 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
 
     async setCurrentFase({ commit, state }: ActionContext<State, State>, { payload }: ActionPayload): Promise<void> {
       commit({ type: 'setCurrentFase', payload })
+    },
+
+    async addPontuacao({ commit, state }: ActionContext<State, State>, { payload }: ActionPayload): Promise<void> {
+      const jogador = state.jogador as JogadorInterface
+
+      if (payload.isRespostaCorreta) {
+        jogador.pontuacaoTotal += payload.pontuacao as number
+        jogador.questoesCertas += 1
+      }
+
+      jogador.questoesTentadas += 1
+
+
+      // TODO - add no banco a cada perguinta ou no final?? 
     },
 
     async criarParticipante({ commit, state }: ActionContext<State, State>, payload: { nome: string, avatar: string }) {

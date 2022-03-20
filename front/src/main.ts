@@ -11,7 +11,8 @@ import './plugins/font-awesome'
 import './assets/style.scss'
 import AvatarPopUp from './components/AvatarPopUp.vue';
 import ScoreCard from './components/ScoreCard.vue';
-import Perguntas from './components/Perguntas.vue';
+import Pergunta from './components/Pergunta.vue';
+import PerguntaBox from './components/PerguntaBox.vue';
 
 const app = createApp(App)
 app.use(store, key).use(router)
@@ -22,6 +23,7 @@ app.component('type-writer', Typewriter)
 app.component('sub-header', SubHeader)
 app.component('avatar-pop-up', AvatarPopUp)
 app.component('score-card', ScoreCard)
-app.component('perguntas', Perguntas)
+app.component('pergunta-box', PerguntaBox)
+app.component('pergunta', Pergunta)
 
 app.mount('#app')

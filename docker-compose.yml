@@ -37,12 +37,15 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
+    user: "5050:5050"
     tty: true
     environment:
       PGADMIN_DEFAULT_EMAIL: "postgres@email.com"
       PGADMIN_DEFAULT_PASSWORD: "postgres"
     ports:
       - "16543:80"
+    volumes:
+      - ./_docker/db/pgadmin:/var/lib/pgadmin
     depends_on:
       - postgres
     networks:

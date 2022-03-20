@@ -1,5 +1,5 @@
 <template>
-  <div class="score-card">
+  <div class="score-card self-end mb-5">
     <div class="m-2">
       <h3 class="m-2">{{ jogador.nome }}</h3>
       <div class="flex">
@@ -48,12 +48,6 @@ export default defineComponent({
 </script>
 <style scoped lang="postcss">
 .score-card {
-  @apply bg-blue-800
-      border
-      rounded-lg
-      absolute
-      top-1
-      right-1
-      text-left;
+  @apply bg-blue-800 border rounded-lg w-fit;
 }
 </style>

@@ -3,36 +3,65 @@
 
   <div class="container">
     <div class="flex flex-col w-full">
-      <div class="bg relative">
-        <div class="flex justify-evenly mt-56 mb-10" v-show="!isPergunta">
-          <div
-            v-for="fase of fasesList"
-            :key="fase.idFase"
-            class="rectangle p-10"
-            @click="gotToFase(fase)"
-          >
-            <img
-              v-if="jogador && jogador.pontuacaoTotal >= fase.minPontuacao"
-              src="../assets/imgs/open-project.png"
-              alt="open-project"
-              srcset=""
-            />
-            <img
-              v-if="jogador && jogador.pontuacaoTotal < fase.minPontuacao"
-              src="../assets/imgs/closed-project.png"
-              alt="closed-project"
-              srcset=""
-            />
-          </div>
-        </div>
-        <perguntas
-          v-show="isPergunta"
-          class="mt-56 mb-10"
-          :currentFase="currentFase"
-        ></perguntas>
+      <div class="bg flex flex-col">
         <score-card></score-card>
+        <div>
+          <div class="flex justify-evenly mt-56 mb-10" v-show="!faseStart">
+            <div
+              v-for="fase of fasesList"
+              :key="fase.idFase"
+              class="rectangle p-10"
+              @click="gotToFase(fase)"
+            >
+              <img
+                v-if="jogador && jogador.pontuacaoTotal >= fase.minPontuacao"
+                src="../assets/imgs/open-project.png"
+                alt="open-project"
+                srcset=""
+              />
+              <img
+                v-if="jogador && jogador.pontuacaoTotal < fase.minPontuacao"
+                src="../assets/imgs/closed-project.png"
+                alt="closed-project"
+                srcset=""
+              />
+            </div>
+          </div>
+          <pergunta-box v-show="faseStart">
+            <div
+              v-show="faseIntro"
+              class="flex flex-col h-full text-left text-blue-800"
+            >
+              <h3 class="mb-10">
+                <strong>{{ currentFase.nome }}</strong>
+              </h3>
+              <p class="grow text-blue-800">{{ currentFase.descricao }}</p>
+              <button
+                class="
+                  mt-20
+                  p-5
+                  rounded-lg
+                  text-white
+                  bg-blue-800
+                  align-bottom
+                  self-end
+                "
+                @click="setPerguntas(currentFase.perguntas)"
+              >
+                OK
+              </button>
+            </div>
+            <pergunta
+              v-show="!faseIntro"
+              class="mb-10"
+              :pergunta="currentPergunta"
+              @resposta="nextPergunta"
+            ></pergunta>
+          </pergunta-box>
+        </div>
       </div>
-      <div class="bg-white" style="height: 100px" v-show="!isPergunta">
+
+      <div class="bg-white" style="height: 100px" v-show="!faseStart">
         <type-writer :speed="70" :text="text"></type-writer>
       </div>
     </div>
@@ -57,6 +86,11 @@ export default defineComponent({
     const store = useStore()
     const isPergunta = ref<boolean>(false)
     const currentFase = ref<FasesInterface | any>({})
+    const faseIntro = ref<boolean>(false)
+    const faseStart = ref<boolean>(false)
+
+    const currentPergunta = ref<PerguntaInterface>()
+    const perguntas = ref<PerguntaInterface[]>([])
 
     let jogador = store.state.jogador
 
@@ -72,7 +106,24 @@ export default defineComponent({
 
       currentFase.value = store.state.currentFase
 
-      isPergunta.value = true
+      faseIntro.value = true
+      faseStart.value = true
+    }
+
+    const setPerguntas = (_perguntas: PerguntaInterface[]) => {
+      perguntas.value = [..._perguntas]
+      nextPergunta()
+    }
+
+    const nextPergunta = () => {
+      const newPergunta: PerguntaInterface | undefined = perguntas.value.shift()
+      if (newPergunta) {
+        currentPergunta.value = { ...newPergunta }
+        faseIntro.value = false
+        isPergunta.value = true
+      } else {
+        faseStart.value = false
+      }
     }
 
     return {
@@ -80,8 +131,13 @@ export default defineComponent({
       fasesList,
       jogador,
       isPergunta,
+      faseIntro,
+      faseStart,
       currentFase,
+      currentPergunta,
       gotToFase,
+      setPerguntas,
+      nextPergunta,
     }
   },
 })

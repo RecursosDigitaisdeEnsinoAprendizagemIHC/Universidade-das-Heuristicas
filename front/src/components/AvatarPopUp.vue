@@ -51,6 +51,7 @@ export default defineComponent({
     const router = useRouter()
 
     const popUp = ref<HTMLElement | null>(null)
+    console.log(store.state.jogador)
     const avatarF = ref<HTMLElement | null>(null)
     const avatarM = ref<HTMLElement | null>(null)
 
@@ -74,8 +75,10 @@ export default defineComponent({
     }
 
     const confirmar = () => {
+      console.log(store.state.jogador)
       if (!nomeParticipante.value || !avatar.value) {
         // TODO - msg de error, colocar no canto direto superior
+        console.log('Error')
         return false
       }
       const participante = {
