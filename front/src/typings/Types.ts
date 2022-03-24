@@ -21,7 +21,7 @@ export interface PerguntaInterface {
   titulo: string
   descricao: string
   pontuacaoPergunta: number
-  imagem?: Buffer
+  imagem?: { type: string, data: any[] }
   eMultiplaEscolha: boolean
   fase: FasesInterface
   respostaVF: RespostaVFInterface

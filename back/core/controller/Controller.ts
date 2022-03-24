@@ -12,6 +12,7 @@ class Controller {
   }
 
   async getRankingList(req: Request, res: Response) {
+    // TODO - get ranking
     const alunos = [
       {
         id: 1,
@@ -59,7 +60,22 @@ class Controller {
     } catch (error) {
       res.status(500).json(error)
     }
+  }
 
+
+  async updateScore(req: Request, res: Response) {
+    const jogador: Jogador = req.body as Jogador
+
+    const score: Partial<Jogador> = {
+      pontuacaoTotal: jogador.pontuacaoTotal
+    }
+
+    try {
+      await this.jogadorRepository.update(jogador.idJogador, score)
+      res.json(true)
+    } catch (error) {
+      res.status(500).json(error)
+    }
   }
 }
 

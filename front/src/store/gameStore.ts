@@ -6,7 +6,16 @@ import { State } from './index';
 
 export const GameStore: { state: State, getters: GetterTree<State, State>, actions: any, mutations: any } = {
   state: {
+    // TODO - set participante to null
     jogador: null,
+    // jogador: {
+    //   idJogador: 0,
+    //   imagemPersonagem: 'M',
+    //   nome: 'abc',
+    //   pontuacaoTotal: 0,
+    //   questoesCertas: 0,
+    //   questoesTentadas: 0,
+    // },
     fases: [],
     currentFase: null
   },
@@ -43,6 +52,7 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
 
 
       // TODO - add no banco a cada perguinta ou no final?? 
+      await apiClient.post('/update-score', jogador)
     },
 
     async criarParticipante({ commit, state }: ActionContext<State, State>, payload: { nome: string, avatar: string }) {

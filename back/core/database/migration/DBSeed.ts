@@ -2,7 +2,11 @@ import { RespostaVF } from './../entity/RespostaVF';
 import { Pergunta } from './../entity/Pergunta';
 import { getRepository, MigrationInterface, QueryRunner } from 'typeorm';
 import { Fase } from './../entity/Fase';
+import { readFileSync } from 'fs';
+import path from 'path';
 
+const imgPergunta1: Buffer = readFileSync(path.join(__dirname, 'perguntaTCC_1.jpeg'))
+const imgPergunta2: Buffer = readFileSync(path.join(__dirname, 'perguntaTCC_2.jpeg'))
 
 const respostasSeed: Partial<RespostaVF>[] = [
   {
@@ -27,6 +31,7 @@ const perguntasFase1: Partial<Pergunta>[] = [
     descricao: 'Descrição da Pergunta 1',
     pontuacaoPergunta: 5,
     eMultiplaEscolha: false,
+    imagem: imgPergunta1
   },
   {
     idPergunta: 1,
@@ -34,6 +39,7 @@ const perguntasFase1: Partial<Pergunta>[] = [
     descricao: 'Desc da pergunta  2',
     pontuacaoPergunta: 15,
     eMultiplaEscolha: false,
+    imagem: imgPergunta2
   },
 ]
 

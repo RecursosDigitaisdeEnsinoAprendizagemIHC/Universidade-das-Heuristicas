@@ -6,7 +6,7 @@
       <div class="bg flex flex-col">
         <score-card></score-card>
         <div>
-          <div class="flex justify-evenly mt-56 mb-10" v-show="!faseStart">
+          <div class="flex justify-evenly mb-10" v-show="!faseStart">
             <div
               v-for="fase of fasesList"
               :key="fase.idFase"
@@ -73,6 +73,7 @@ import { ref, onMounted } from 'vue'
 import ScoreCard from '../components/ScoreCard.vue'
 import { useStore } from '../store/index'
 import { FasesInterface, PerguntaInterface } from '../typings/Types'
+import { shuffleArray } from '../utils/Utils'
 
 export default defineComponent({
   components: { ScoreCard },
@@ -111,7 +112,7 @@ export default defineComponent({
     }
 
     const setPerguntas = (_perguntas: PerguntaInterface[]) => {
-      perguntas.value = [..._perguntas]
+      perguntas.value = [...shuffleArray(_perguntas)]
       nextPergunta()
     }
 

@@ -26,6 +26,16 @@ export class Jogador extends BaseEntity {
   })
   pontuacaoTotal!: number;
 
-  @ManyToMany(type => Fase, fase => fase.jogadores)
-  fases!: Fase[];
+  @Column({
+    type: 'numeric',
+    nullable: false
+  })
+  questoesCertas!: number;
+
+  @Column({
+    type: 'numeric',
+    nullable: false
+  })
+  questoesTentadas!: number;
+
 }

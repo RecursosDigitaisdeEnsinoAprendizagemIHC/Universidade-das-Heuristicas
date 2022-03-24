@@ -17,3 +17,7 @@ npm run typeorm-migration
 
 
 sudo chown 5050:5050
+
+
+
+

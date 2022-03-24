@@ -3,6 +3,10 @@
     <div v-if="eMultiplaEscolha" class="flex flex-col h-full text-left">
       <h2>{{ pergunta.descricao }}</h2>
       <br />
+      <template v-if="hasImage">
+        <img :src="getImage(pergunta.imagem)" :alt="pergunta.descricao" />
+      </template>
+      <br />
       <input type="radio" name="resposta" value="1" v-model="respostaModel" />
       {{ respostaMultiRef?.descricaoOpcao1 }}
       <input type="radio" name="resposta" value="2" v-model="respostaModel" />
@@ -20,6 +24,10 @@
       <h2 class="mb-10">
         <strong>Avalie a frase seguinte como correta ou incorreta:</strong>
       </h2>
+      <br />
+      <template v-if="hasImage">
+        <img :src="getImage(pergunta.imagem)" :alt="pergunta.descricao" />
+      </template>
       <br />
       <p class="text-blue-800 mb-10">{{ pergunta.descricao }}</p>
       <br />
@@ -88,7 +96,7 @@
 
 <script lang="ts">
 import { defineComponent, onUpdated } from '@vue/runtime-core'
-import { PropType, ref } from 'vue'
+import { PropType, ref, computed } from 'vue'
 import { useStore } from '../store/index'
 import {
   PerguntaInterface,
@@ -96,6 +104,7 @@ import {
   RespostaVFInterface,
   FeedBackInterface,
 } from '../typings/Types'
+import { toBufferToBase64 } from '../utils/Utils'
 
 export default defineComponent({
   name: 'Perguntas',
@@ -174,6 +183,17 @@ export default defineComponent({
       isFeedback.value = false
     }
 
+    const getImage = (
+      perguntaImgBuffer: { type: string; data: any[] } | undefined
+    ) =>
+      perguntaImgBuffer
+        ? `data:image/png;base64,${toBufferToBase64(perguntaImgBuffer.data)}`
+        : ''
+
+    const hasImage = computed(() =>
+      perguntaRef.value && perguntaRef.value.imagem ? true : false
+    )
+
     return {
       eMultiplaEscolha,
       perguntaRef,
@@ -184,6 +204,8 @@ export default defineComponent({
       isFeedback,
       emitNextPergunta,
       checkResposta,
+      getImage,
+      hasImage,
     }
   },
 })

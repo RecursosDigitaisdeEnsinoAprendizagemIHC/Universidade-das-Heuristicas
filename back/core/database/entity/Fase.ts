@@ -14,18 +14,11 @@ export class Fase {
   })
   nome!: string;
 
-
   @Column({
     type: 'text',
     nullable: false
   })
   descricao!: string;
-
-  @Column({
-    type: "bytea",
-    nullable: true
-  })
-  imagem?: Buffer;
 
   @Column({
     type: 'int',
@@ -38,10 +31,6 @@ export class Fase {
     nullable: false
   })
   dificuldade!: number;
-
-  @ManyToMany(type => Jogador, jogador => jogador.fases)
-  @JoinTable()
-  jogadores!: Jogador;
 
   @OneToMany(type => Pergunta, pergunta => pergunta.fase, { eager: true })
   perguntas!: Pergunta[];
