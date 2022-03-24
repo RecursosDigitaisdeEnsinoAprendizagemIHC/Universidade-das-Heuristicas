@@ -11,6 +11,10 @@ Para a instalaçao do projeto é necessário ter JavaScript (versão ou superior
  - git clone https://github.com/RecursosDigitaisdeEnsinoAprendizagemIHC/Universidade-das-Heuristicas.git
  - npm install back/
  - npm install front/
+ - cd back
+ - npm run typeorm-sync
+- npm run typeorm-migration
+- cd ..
  - ./up.sh
  - cd front/ 
  - npm run dev
