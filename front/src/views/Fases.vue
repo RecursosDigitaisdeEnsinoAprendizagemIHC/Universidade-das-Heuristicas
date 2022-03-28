@@ -1,7 +1,7 @@
 <template>
   <sub-header :hideVoltar="true"></sub-header>
 
-  <div class="container">
+  <div class="container h-full">
     <div class="flex flex-col w-full">
       <div class="bg flex flex-col">
         <score-card></score-card>
@@ -10,7 +10,7 @@
             <div
               v-for="fase of fasesList"
               :key="fase.idFase"
-              class="rectangle p-10"
+              class="rectangle p-5"
               @click="gotToFase(fase)"
             >
               <img
@@ -18,12 +18,14 @@
                 src="../assets/imgs/open-project.png"
                 alt="open-project"
                 srcset=""
+                class="w-10/12 m-auto md:w-3/4"
               />
               <img
                 v-if="jogador && jogador.pontuacaoTotal < fase.minPontuacao"
                 src="../assets/imgs/closed-project.png"
                 alt="closed-project"
                 srcset=""
+                class="w-10/12 m-auto m-auto md:w-3/4"
               />
             </div>
           </div>
@@ -61,7 +63,7 @@
         </div>
       </div>
 
-      <div class="bg-white" style="height: 100px" v-show="!faseStart">
+      <div class="bg-white white-bg" v-show="!faseStart">
         <type-writer :speed="70" :text="text"></type-writer>
       </div>
     </div>
@@ -69,14 +71,19 @@
 </template>
 <script lang="ts">
 import { defineComponent } from '@vue/runtime-core'
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import Pergunta from '../components/Pergunta.vue'
+import PerguntaBox from '../components/PerguntaBox.vue'
 import ScoreCard from '../components/ScoreCard.vue'
+import SubHeader from '../components/SubHeader.vue'
+import Typewriter from '../components/Typewriter.vue'
 import { useStore } from '../store/index'
 import { FasesInterface, PerguntaInterface } from '../typings/Types'
 import { shuffleArray } from '../utils/Utils'
 
 export default defineComponent({
-  components: { ScoreCard },
+  components: { PerguntaBox, Pergunta, Typewriter, SubHeader, ScoreCard },
   name: 'Fases',
 
   setup() {
@@ -85,6 +92,7 @@ export default defineComponent({
 
     const fasesList = ref<FasesInterface[]>([])
     const store = useStore()
+    const router = useRouter()
     const isPergunta = ref<boolean>(false)
     const currentFase = ref<FasesInterface | any>({})
     const faseIntro = ref<boolean>(false)
@@ -94,6 +102,15 @@ export default defineComponent({
     const perguntas = ref<PerguntaInterface[]>([])
 
     let jogador = store.state.jogador
+    if (jogador == null) {
+      jogador = store.getters.getJogador()
+      if (!jogador) {
+        return router.push({ name: 'Home' })
+      }
+
+      store.commit({ type: 'setJogador', payload: { ...jogador } })
+      jogador = store.state.jogador
+    }
 
     onMounted(async () => {
       await store.dispatch({ type: 'getFases' })

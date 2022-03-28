@@ -12,28 +12,17 @@ class Controller {
   }
 
   async getRankingList(req: Request, res: Response) {
-    // TODO - get ranking
-    const alunos = [
-      {
-        id: 1,
-        nome: 'Participante 1',
-        pontos: 10,
-        questoes: 2,
-      },
-      {
-        id: 2,
-        nome: 'Participante 2',
-        pontos: 30,
-        questoes: 7,
-      },
-      {
-        id: 3,
-        nome: 'Participante 3',
-        pontos: 2,
-        questoes: 1,
-      },
-    ]
-    res.json(alunos)
+
+    try {
+      const ranking = await this.jogadorRepository.find({
+        order: {
+          pontuacaoTotal: 'DESC'
+        }
+      })
+      res.status(200).json(ranking)
+    } catch (error) {
+      res.status(500).json(error)
+    }
   }
 
 

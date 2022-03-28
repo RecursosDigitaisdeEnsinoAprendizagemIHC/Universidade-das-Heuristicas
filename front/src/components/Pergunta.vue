@@ -2,11 +2,9 @@
   <div v-if="!isFeedback">
     <div v-if="eMultiplaEscolha" class="flex flex-col h-full text-left">
       <h2>{{ pergunta.descricao }}</h2>
-      <br />
       <template v-if="hasImage">
         <img :src="getImage(pergunta.imagem)" :alt="pergunta.descricao" />
       </template>
-      <br />
       <input type="radio" name="resposta" value="1" v-model="respostaModel" />
       {{ respostaMultiRef?.descricaoOpcao1 }}
       <input type="radio" name="resposta" value="2" v-model="respostaModel" />
@@ -21,19 +19,24 @@
       </button>
     </div>
     <div v-else class="flex flex-col h-full">
-      <h2 class="mb-10">
-        <strong>Avalie a frase seguinte como correta ou incorreta:</strong>
+      <h2 class="mb-1 md:mb-10">
+        <strong class="text"
+          >Avalie a frase seguinte como correta ou incorreta:</strong
+        >
       </h2>
-      <br />
       <template v-if="hasImage">
-        <img :src="getImage(pergunta.imagem)" :alt="pergunta.descricao" />
+        <img
+          :src="getImage(pergunta.imagem)"
+          :alt="pergunta.descricao"
+          class="m-auto w-1/4 md:w-1/2 lg:w-full"
+        />
       </template>
-      <br />
-      <p class="text-blue-800 mb-10">{{ pergunta.descricao }}</p>
-      <br />
+      <p class="text-blue-800 mb-1 md:mb-10 text">
+        {{ pergunta.descricao }}
+      </p>
       <div class="flex flex-col items-start grow h-full">
         <div class="my-2 mx-5">
-          <label>
+          <label class="text">
             <input
               type="radio"
               name="resposta"
@@ -44,7 +47,7 @@
           </label>
         </div>
         <div class="my-2 mx-5">
-          <label>
+          <label class="text">
             <input
               type="radio"
               name="resposta"
@@ -58,13 +61,15 @@
 
       <button
         class="
-          mt-20
+          mt-5
+          lg:mt-10
           p-5
           rounded-lg
           text-white
           bg-blue-800
           align-bottom
           self-center
+          text
         "
         @click="checkResposta(respostaVFRef, respostaModel)"
       >
@@ -72,7 +77,7 @@
       </button>
     </div>
   </div>
-  <div v-else class="flex flex-col h-full">
+  <div v-else class="flex flex-col h-full text-">
     <h2 :class="feedback.color" class="mb-10 text-red-">
       <strong>{{ feedback.title }}</strong>
     </h2>
@@ -86,6 +91,7 @@
         bg-blue-800
         align-bottom
         self-center
+        text
       "
       @click="emitNextPergunta()"
     >
@@ -149,9 +155,9 @@ export default defineComponent({
         | RespostaVFInterface
         | RespostaMultiplaEscolhaInferface
         | undefined,
-      respostaModel: any
+      respostaModelValue: any
     ) => {
-      if (!respostaModel) {
+      if (!respostaModelValue) {
         // TODO - error
         console.error('Error, escolha resposta')
         return false
@@ -160,7 +166,7 @@ export default defineComponent({
       let isRespostaCorreta = false
       const pontuacao = perguntaRef.value?.pontuacaoPergunta || 0
 
-      if (resposta?.chaveResposta === Number(respostaModel)) {
+      if (resposta?.chaveResposta === Number(respostaModelValue)) {
         isRespostaCorreta = true
 
         feedback.value.color = 'text-green-500'
@@ -176,6 +182,7 @@ export default defineComponent({
 
       store.dispatch({ type: 'addPontuacao', payload })
       isFeedback.value = true
+      respostaModel.value = ''
     }
 
     const emitNextPergunta = () => {
@@ -210,4 +217,8 @@ export default defineComponent({
   },
 })
 </script>
-<style scoped lang="postcss"></style>
+<style scoped lang="postcss">
+.text {
+  @apply text-sm md:text-base lg:text-lg;
+}
+</style>

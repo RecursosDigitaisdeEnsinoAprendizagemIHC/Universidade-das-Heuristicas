@@ -8,17 +8,25 @@
             v-if="jogador.imagemPersonagem == 'F'"
             src="../assets/imgs/avatar-feminino.png"
             alt="avatar-feminino"
+            class="w-3/4 m-auto md:w-10/12"
           />
           <img
             v-else
             src="../assets/imgs/avatar-masculino.png"
             alt="avatar-masculino"
+            class="w-3/4 m-auto md:w-10/12"
           />
         </div>
         <div class="flex flex-col">
-          <span class="">PTS {{ jogador.pontuacaoTotal }}</span>
-          <span class="">certas {{ jogador.questoesCertas }}</span>
-          <span class="">tentadas {{ jogador.questoesTentadas }}</span>
+          <span class="text-sm md:text-lg"
+            >PTS {{ jogador.pontuacaoTotal }}</span
+          >
+          <span class="text-sm md:text-lg"
+            >certas {{ jogador.questoesCertas }}</span
+          >
+          <span class="text-sm md:text-lg"
+            >tentadas {{ jogador.questoesTentadas }}</span
+          >
         </div>
       </div>
     </div>
@@ -38,8 +46,9 @@ export default defineComponent({
     const store = useStore()
 
     const jogador = ref<JogadorInterface>(
-      store.state.jogador as JogadorInterface
+      store.getters.getJogador() as JogadorInterface
     )
+
     onUpdated(() => {})
 
     return { jogador }

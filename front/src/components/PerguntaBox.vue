@@ -1,7 +1,7 @@
 <template>
-  <div class="flex items-end m-10 mt-0">
+  <div class="flex items-end mx-5 mt-0 mb-2 md:mx-10 md:mb-10">
     <img
-      class="rectangle p-10 shrink w-1/4 h-1/4"
+      class="rectangle p-5 lg:p-10 shrink w-1/5 h-1/5 md:w-1/4 md:h-1/4"
       src="../assets/imgs/open-project.png"
       alt="open-project"
       srcset=""

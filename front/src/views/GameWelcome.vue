@@ -1,7 +1,7 @@
 <template>
   <sub-header :hideVoltar="true"></sub-header>
 
-  <div class="container">
+  <div class="container h-full">
     <div class="flex flex-col">
       <div>
         <img
@@ -10,7 +10,7 @@
           srcset=""
         />
       </div>
-      <div class="bg-white" style="height: 100px">
+      <div class="bg-white white-bg">
         <!-- TODO  SPEED 70 -->
         <type-writer :speed="10" :text="text" :goTo="'/fases'"></type-writer>
       </div>

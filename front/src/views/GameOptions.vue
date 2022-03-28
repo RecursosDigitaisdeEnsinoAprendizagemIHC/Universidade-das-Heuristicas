@@ -1,7 +1,7 @@
 <template>
   <p class="text-blue-800 text-base">Universidade das Heurísticas</p>
 
-  <div class="container">
+  <div class="container h-full">
     <div class="flex w-full justify-around h-1/4 space-x-20">
       <div class="bg-option" @click="openPopUp">
         <p>Jogar</p>

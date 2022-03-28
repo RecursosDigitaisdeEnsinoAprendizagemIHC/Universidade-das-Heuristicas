@@ -9,7 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "typeorm": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.json",
     "typeorm-sync": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.json 'schema:sync'",
-    "typeorm-migration": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.json 'migration:run'"
+    "typeorm-migration": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.json 'migration:run'",
+    "db": "npm run typeorm-sync; npm run typeorm-migration"
   },
   "dependencies": {
     "axios": "^0.24.0",

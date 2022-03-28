@@ -3,7 +3,7 @@
 
   <div class="container">
     <div class="ranking w-full">
-      <table class="table-auto w-full">
+      <!-- <table class="table-auto w-full">
         <thead>
           <tr>
             <th>Nome</th>
@@ -12,31 +12,38 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="participante of rankingList" :key="participante.id + 1">
+          <tr
+            v-for="participante of rankingList"
+            :key="participante.idJogador + 1"
+          >
             <td>{{ participante.nome }}</td>
-            <td>{{ participante.pontos }}</td>
+            <td>{{ participante.pontuacaoTotal }}</td>
             <td>{{ participante.questoesCertas }}</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
+      <rank-list></rank-list>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { computed, ref, defineComponent, onMounted } from '@vue/runtime-core'
+import { ref, defineComponent, onMounted, reactive } from '@vue/runtime-core'
 import { JogadorInterface } from '../typings/Types'
 import { useStore } from '../store/index'
-
+import RankList from '../components/RankList.vue'
+import SubHeader from '../components/SubHeader.vue'
 export default defineComponent({
   name: 'Ranking',
+  components: { RankList, SubHeader },
   setup() {
     const rankingList = ref<JogadorInterface[]>([])
     const store = useStore()
 
-    onMounted(async () => {
-      const alunos = await store.getters.getRankingList
-      rankingList.value = alunos
-    })
+    // onMounted(async () => {
+    //   const alunos = await store.dispatch({ type: 'getRankingList' })
+    //   // TODO - terminar ranking
+    //   rankingList.value = alunos
+    // })
 
     return {
       rankingList,
@@ -48,5 +55,9 @@ export default defineComponent({
 .container {
   height: initial;
   margin-top: 1em;
+}
+
+:deep(.vtl-paging) {
+  @apply text-sm;
 }
 </style>

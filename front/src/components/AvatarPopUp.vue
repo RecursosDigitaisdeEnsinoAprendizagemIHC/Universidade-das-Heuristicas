@@ -11,6 +11,7 @@
         placeholder="Digite seu nome..."
         class="mt-4"
         v-model="nomeParticipante"
+        maxlength="3"
       />
       <div class="flex justify-around mt-4 mb-8">
         <img
@@ -83,7 +84,7 @@ export default defineComponent({
         avatar: avatar.value,
         nome: nomeParticipante.value,
       }
-      if (store.state.jogador == null) {
+      if (store.getters.getJogador() == null) {
         store.dispatch({ type: 'criarParticipante', ...participante })
         router.push('/game-welcome')
       }
