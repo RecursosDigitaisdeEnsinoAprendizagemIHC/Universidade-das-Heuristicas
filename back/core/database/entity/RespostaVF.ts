@@ -11,12 +11,6 @@ export class RespostaVF extends BaseEntity {
     type: 'int',
     nullable: false
   })
-  dificuldadePergunta!: number;
-
-  @Column({
-    type: 'int',
-    nullable: false
-  })
   chaveResposta!: number;
 
   @Column({

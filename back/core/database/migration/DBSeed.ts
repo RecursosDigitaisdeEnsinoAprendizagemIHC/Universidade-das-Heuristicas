@@ -11,13 +11,11 @@ const imgPergunta2: Buffer = readFileSync(path.join(__dirname, 'perguntaTCC_2.jp
 const respostasSeed: Partial<RespostaVF>[] = [
   {
     idRespostaVF: 0,
-    dificuldadePergunta: 1,
     chaveResposta: 0, // TODO - ver sig chave resposta
     descricaoFeedback: 'Voce Errou por isso e isso'
   },
   {
     idRespostaVF: 1,
-    dificuldadePergunta: 2,
     chaveResposta: 0, // TODO - ver sig chave resposta - 
     descricaoFeedback: 'Voce Errou por isso e isso'
   },

@@ -17,7 +17,7 @@ export class Pergunta extends BaseEntity {
 
   @Column({
     type: 'text',
-    nullable: false
+    nullable: true
   })
   descricao!: string;
 
