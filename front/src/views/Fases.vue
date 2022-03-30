@@ -1,5 +1,5 @@
 <template>
-  <sub-header :hideVoltar="true"></sub-header>
+  <sub-header :hideVoltar="true" :showLinks="true"></sub-header>
 
   <div class="container h-full">
     <div class="flex flex-col w-full">

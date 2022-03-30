@@ -2,7 +2,10 @@
   <sub-header title="Ranking"></sub-header>
 
   <div class="container">
-    <div class="ranking w-full">
+    <div
+      class="ranking w-full"
+      style="display: flex; flex-direction: row; height: 100%"
+    >
       <!-- <table class="table-auto w-full">
         <thead>
           <tr>
@@ -53,7 +56,7 @@ export default defineComponent({
 </script>
 <style scoped lang="postcss">
 .container {
-  height: initial;
+  height: 80%;
   margin-top: 1em;
 }
 

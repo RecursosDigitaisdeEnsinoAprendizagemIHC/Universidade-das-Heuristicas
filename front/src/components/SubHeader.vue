@@ -1,6 +1,13 @@
 <template>
   <p class="text-blue-800 text-base">
     Universidade das Heurísticas{{ subTitle }}
+    <span v-if="showLinks == true">
+      |
+      <router-link to="/ranking" class="underline">Ranking</router-link>
+      -
+      <router-link to="/" class="underline">Novo Jogo</router-link>
+      |
+    </span>
   </p>
   <div
     v-if="hideVoltar == false"
@@ -33,14 +40,21 @@ export default defineComponent({
       required: false,
       default: false,
     },
+    showLinks: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   setup(props) {
     const subTitle = props.title ? ` - ${props.title}` : ''
     const hideVoltar = props.hideVoltar
+    const showLinks = props.showLinks
 
     return {
       subTitle,
       hideVoltar,
+      showLinks,
     }
   },
 })

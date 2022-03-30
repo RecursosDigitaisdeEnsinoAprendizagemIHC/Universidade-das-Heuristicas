@@ -1,9 +1,10 @@
 <template>
   <ag-grid-vue
-    style="height: 500px"
-    class="ag-theme-alpine h-1/2"
+    style="height: 100%; width: 100%"
+    class="ag-theme-alpine"
     :columnDefs="table.columnDefs"
     :rowData="rowData"
+    @first-data-rendered="onFirstDataRendered"
   >
   </ag-grid-vue>
 </template>
@@ -12,6 +13,7 @@
 import { defineComponent, onMounted, ref } from '@vue/runtime-core'
 import { AgGridVue } from 'ag-grid-vue3'
 import { useStore } from '../store'
+import { JogadorInterface } from '../typings/Types'
 
 export default defineComponent({
   name: 'RankList',
@@ -20,23 +22,41 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
-    let rowData = ref([])
+    let rowData = ref<JogadorInterface[]>([])
 
     const table = {
       columnDefs: [
         { headerName: 'Nome', field: 'nome', sortable: true },
         { headerName: 'Pontos', field: 'pontuacaoTotal', sortable: true },
-        { headerName: 'Questões', field: 'questoesCertas', sortable: true },
+        { headerName: 'Questões', field: 'porcetagem', sortable: true },
       ],
       rowData,
+      defaultColDef: {
+        field: 'pontuacaoTotal',
+        resizable: true,
+      },
     }
 
     onMounted(async () => {
-      const alunos = await store.dispatch({ type: 'getRankingList' })
-      // TODO - terminar ranking
+      const alunos: JogadorInterface[] = await store.dispatch({
+        type: 'getRankingList',
+      })
+      alunos.forEach((aluno) => {
+        let porcentagem =
+          (Number(aluno.questoesCertas) * 100) / Number(aluno.questoesTentadas)
+
+        porcentagem = isNaN(porcentagem) ? 0 : porcentagem
+
+        aluno.porcetagem = `${porcentagem.toFixed(2)}%`
+      })
       rowData.value = alunos
     })
-    return { table, rowData }
+
+    const onFirstDataRendered = (params) => {
+      params.api.sizeColumnsToFit()
+    }
+
+    return { table, rowData, onFirstDataRendered }
   },
 })
 </script>
