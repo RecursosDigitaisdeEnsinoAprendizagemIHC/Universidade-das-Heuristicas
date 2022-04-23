@@ -56,7 +56,9 @@ class Controller {
     const jogador: Jogador = req.body as Jogador
 
     const score: Partial<Jogador> = {
-      pontuacaoTotal: jogador.pontuacaoTotal
+      pontuacaoTotal: jogador.pontuacaoTotal,
+      questoesCertas: jogador.questoesCertas,
+      questoesTentadas: jogador.questoesTentadas
     }
 
     try {

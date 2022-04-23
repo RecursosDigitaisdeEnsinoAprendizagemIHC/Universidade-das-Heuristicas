@@ -14,7 +14,8 @@ export interface FasesInterface {
   descricao: string
   dificuldade: number
   minPontuacao: number
-  perguntas: PerguntaInterface[]
+  perguntas: PerguntaInterface[],
+  proxFasePontuacao: number
 }
 
 export interface PerguntaInterface {

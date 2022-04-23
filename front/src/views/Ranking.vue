@@ -6,25 +6,6 @@
       class="ranking w-full"
       style="display: flex; flex-direction: row; height: 100%"
     >
-      <!-- <table class="table-auto w-full">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Pontos</th>
-            <th>Questões</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="participante of rankingList"
-            :key="participante.idJogador + 1"
-          >
-            <td>{{ participante.nome }}</td>
-            <td>{{ participante.pontuacaoTotal }}</td>
-            <td>{{ participante.questoesCertas }}</td>
-          </tr>
-        </tbody>
-      </table> -->
       <rank-list></rank-list>
     </div>
   </div>
@@ -41,12 +22,6 @@ export default defineComponent({
   setup() {
     const rankingList = ref<JogadorInterface[]>([])
     const store = useStore()
-
-    // onMounted(async () => {
-    //   const alunos = await store.dispatch({ type: 'getRankingList' })
-    //   // TODO - terminar ranking
-    //   rankingList.value = alunos
-    // })
 
     return {
       rankingList,

@@ -3,34 +3,80 @@
     <div v-if="eMultiplaEscolha" class="flex flex-col h-full text-left">
       <h2>{{ pergunta.descricao }}</h2>
       <template v-if="hasImage">
-        <img :src="getImage(pergunta.imagem)" :alt="pergunta.descricao" />
+        <img
+          :src="getImage(pergunta.imagem)"
+          :alt="pergunta.descricao"
+          class="image cursor-pointer"
+          ref="image"
+          @click="openNewTab()"
+        />
       </template>
-      <input type="radio" name="resposta" value="1" v-model="respostaModel" />
-      {{ respostaMultiRef?.descricaoOpcao1 }}
-      <input type="radio" name="resposta" value="2" v-model="respostaModel" />
-      {{ respostaMultiRef?.descricaoOpcao2 }}
-      <input type="radio" name="resposta" value="3" v-model="respostaModel" />
-      {{ respostaMultiRef?.descricaoOpcao3 }}
-      <input type="radio" name="resposta" value="4" v-model="respostaModel" />
-      {{ respostaMultiRef?.descricaoOpcao4 }}
+      <div class="my-2 mx-5">
+        <label class="text">
+          <input
+            type="radio"
+            name="resposta"
+            value="1"
+            v-model="respostaModel"
+          />
+          {{ respostaMultiRef?.descricaoOpcao1 }}
+        </label>
+      </div>
 
-      <button @click="checkResposta(respostaMultiRef, respostaModel)">
+      <div class="my-2 mx-5">
+        <label class="text">
+          <input
+            type="radio"
+            name="resposta"
+            value="2"
+            v-model="respostaModel"
+          />
+          {{ respostaMultiRef?.descricaoOpcao2 }}
+        </label>
+      </div>
+      <div class="my-2 mx-5">
+        <label class="text">
+          <input
+            type="radio"
+            name="resposta"
+            value="3"
+            v-model="respostaModel"
+          />
+          {{ respostaMultiRef?.descricaoOpcao3 }}
+        </label>
+      </div>
+      <div class="my-2 mx-5">
+        <label class="text">
+          <input
+            type="radio"
+            name="resposta"
+            value="4"
+            v-model="respostaModel"
+          />
+          {{ respostaMultiRef?.descricaoOpcao4 }}
+        </label>
+      </div>
+      <button
+        class="
+          mt-5
+          lg:mt-10
+          p-5
+          rounded-lg
+          text-white
+          bg-blue-800
+          align-bottom
+          self-center
+          text
+        "
+        @click="checkResposta(respostaMultiRef, respostaModel)"
+      >
         OK
       </button>
     </div>
     <div v-else class="flex flex-col h-full">
       <h2 class="mb-1 md:mb-10">
-        <strong class="text"
-          >Avalie a frase seguinte como correta ou incorreta:</strong
-        >
+        <strong class="text">{{ pergunta.titulo }}</strong>
       </h2>
-      <template v-if="hasImage">
-        <img
-          :src="getImage(pergunta.imagem)"
-          :alt="pergunta.descricao"
-          class="m-auto w-1/4 md:w-1/2 lg:w-full"
-        />
-      </template>
       <p class="text-blue-800 mb-1 md:mb-10 text">
         {{ pergunta.descricao }}
       </p>
@@ -78,7 +124,7 @@
     </div>
   </div>
   <div v-else class="flex flex-col h-full text-">
-    <h2 :class="feedback.color" class="mb-10 text-red-">
+    <h2 :class="feedback.color" class="mb-10 text-red">
       <strong>{{ feedback.title }}</strong>
     </h2>
     <p>{{ feedback.description }}</p>
@@ -137,6 +183,8 @@ export default defineComponent({
     const isFeedback = ref<boolean>(false)
 
     const respostaModel = ref()
+
+    const image = ref<HTMLImageElement | null>(null)
 
     onUpdated(() => {
       const { pergunta } = props
@@ -201,6 +249,15 @@ export default defineComponent({
       perguntaRef.value && perguntaRef.value.imagem ? true : false
     )
 
+    const openNewTab = () => {
+      if (image.value) {
+        const newWindow = window.open(image.value.src, '_blank')
+        if (newWindow) {
+          newWindow.document.write(image.value.outerHTML)
+        }
+      }
+    }
+
     return {
       eMultiplaEscolha,
       perguntaRef,
@@ -212,13 +269,20 @@ export default defineComponent({
       emitNextPergunta,
       checkResposta,
       getImage,
+      openNewTab,
       hasImage,
+      image,
     }
   },
 })
 </script>
 <style scoped lang="postcss">
 .text {
-  @apply text-sm md:text-base lg:text-lg;
+  @apply text-sm md:text-sm lg:text-base;
+}
+
+.image {
+  width: 70%;
+  margin: 0 auto;
 }
 </style>

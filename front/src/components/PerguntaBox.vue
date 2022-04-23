@@ -7,11 +7,36 @@
       srcset=""
     />
     <div class="pergunta ml-5 mr-2 grow">
+      <div class="float-right ml-2 cursor-pointer" @click="goToFases">
+        <font-awesome-icon icon="times-circle" size="2x" class="text-red-800" />
+      </div>
       <slot></slot>
     </div>
   </div>
 </template>
+<script lang="ts">
+import { defineComponent, PropType } from '@vue/runtime-core'
+import { useRouter } from 'vue-router'
+import { FasesInterface } from '../typings/Types'
 
+export default defineComponent({
+  name: 'PerguntaBox',
+  emits: ['close'],
+
+  setup(props, { emit }) {
+    const router = useRouter()
+
+    const goToFases = () => {
+      console.log('asaas')
+      emit('close')
+    }
+
+    return {
+      goToFases,
+    }
+  },
+})
+</script>
 <style scoped lang="postcss">
 .rectangle {
   @apply border-opacity-100 border-8 border-blue-800 rounded-3xl;
@@ -26,6 +51,7 @@
   padding: 24px;
   margin-bottom: 25px;
   text-align: center;
+  box-sizing: content-box;
 }
 
 .pergunta:before {

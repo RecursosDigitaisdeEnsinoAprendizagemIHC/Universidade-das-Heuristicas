@@ -29,7 +29,7 @@
               />
             </div>
           </div>
-          <pergunta-box v-show="faseStart">
+          <pergunta-box v-show="faseStart" @close="close">
             <div
               v-show="faseIntro"
               class="flex flex-col h-full text-left text-blue-800"
@@ -55,7 +55,7 @@
             </div>
             <pergunta
               v-show="!faseIntro"
-              class="mb-10"
+              class="mb-10 pergunta-scroll"
               :pergunta="currentPergunta"
               @resposta="nextPergunta"
             ></pergunta>
@@ -81,6 +81,8 @@ import Typewriter from '../components/Typewriter.vue'
 import { useStore } from '../store/index'
 import { FasesInterface, PerguntaInterface } from '../typings/Types'
 import { shuffleArray } from '../utils/Utils'
+
+const FASE_INFINITA = -1
 
 export default defineComponent({
   components: { PerguntaBox, Pergunta, Typewriter, SubHeader, ScoreCard },
@@ -114,7 +116,13 @@ export default defineComponent({
 
     onMounted(async () => {
       await store.dispatch({ type: 'getFases' })
-      fasesList.value = store.state.fases
+      const fases = store.state.fases.map((fase, index, fases) => {
+        fase.proxFasePontuacao = fases[index + 1]
+          ? fases[index + 1].minPontuacao
+          : FASE_INFINITA
+        return fase
+      })
+      fasesList.value = fases
     })
 
     const gotToFase = (fase: FasesInterface) => {
@@ -134,6 +142,8 @@ export default defineComponent({
     }
 
     const nextPergunta = () => {
+      if (nextFase()) return false
+
       const newPergunta: PerguntaInterface | undefined = perguntas.value.shift()
       if (newPergunta) {
         currentPergunta.value = { ...newPergunta }
@@ -142,6 +152,25 @@ export default defineComponent({
       } else {
         faseStart.value = false
       }
+    }
+
+    const close = () => {
+      faseStart.value = false
+    }
+
+    const nextFase = () => {
+      const fase = currentFase.value
+      if (
+        fase.proxFasePontuacao != FASE_INFINITA &&
+        jogador &&
+        jogador?.pontuacaoTotal >= fase.proxFasePontuacao
+      ) {
+        currentFase.value.proxFasePontuacao = FASE_INFINITA
+        close()
+        return true
+      }
+
+      return false
     }
 
     return {
@@ -156,6 +185,7 @@ export default defineComponent({
       gotToFase,
       setPerguntas,
       nextPergunta,
+      close,
     }
   },
 })
@@ -163,6 +193,11 @@ export default defineComponent({
 <style scoped lang="postcss">
 .bg {
   background-image: url('../assets/imgs/fases-bg.png');
+}
+
+.pergunta-scroll {
+  height: inherit;
+  overflow-y: auto;
 }
 
 .rectangle {

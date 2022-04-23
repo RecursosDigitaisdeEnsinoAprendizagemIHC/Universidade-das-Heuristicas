@@ -19,13 +19,13 @@
         </div>
         <div class="flex flex-col">
           <span class="text-sm md:text-lg"
-            >PTS {{ jogador.pontuacaoTotal }}</span
+            >Pontos {{ jogador.pontuacaoTotal }}</span
           >
           <span class="text-sm md:text-lg"
-            >certas {{ jogador.questoesCertas }}</span
+            >questões certas {{ jogador.questoesCertas }}</span
           >
           <span class="text-sm md:text-lg"
-            >tentadas {{ jogador.questoesTentadas }}</span
+            >questões tentadas {{ jogador.questoesTentadas }}</span
           >
         </div>
       </div>

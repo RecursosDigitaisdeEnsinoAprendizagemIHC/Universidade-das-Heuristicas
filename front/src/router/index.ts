@@ -26,19 +26,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/game-options',
     name: 'GameOptions',
     component: GameOptions,
-    // beforeEnter: protectedRoute,
   },
   {
     path: '/game-welcome',
     name: 'GameWelcome',
     component: GameWelcome,
-    // beforeEnter: protectedRoute,
   },
   {
     path: '/fases',
     name: 'Fases',
     component: Fases,
-    // beforeEnter: protectedRoute,
+
   },
 ]
 
