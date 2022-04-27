@@ -18,7 +18,7 @@
           hover:animate-pulse hover:shadow-xl;
         "
       >
-        <h1>Começar</h1>
+        <h1>Dê o play</h1>
         <div class="pl-4">
           <font-awesome-icon icon="play" size="4x" class="text-blue-800" />
         </div>

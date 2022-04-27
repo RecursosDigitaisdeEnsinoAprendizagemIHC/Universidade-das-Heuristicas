@@ -18,15 +18,18 @@
           />
         </div>
         <div class="flex flex-col">
-          <span class="text-sm md:text-lg"
-            >Pontos {{ jogador.pontuacaoTotal }}</span
+          <span class="text-sm md:text-lg flex justify-between">
+            <span class="mr-5">Pontos</span>
+            <span class="ml-5">{{ jogador.pontuacaoTotal }}</span></span
           >
-          <span class="text-sm md:text-lg"
-            >questões certas {{ jogador.questoesCertas }}</span
-          >
-          <span class="text-sm md:text-lg"
-            >questões tentadas {{ jogador.questoesTentadas }}</span
-          >
+          <span class="text-sm md:text-lg flex justify-between">
+            <span class="mr-5">Questões certas</span>
+            <span class="ml-5">{{ jogador.questoesCertas }}</span>
+          </span>
+          <span class="text-sm md:text-lg flex justify-between"
+            ><span class="mr-5">Questões tentadas</span>
+            <span class="ml-5">{{ jogador.questoesTentadas }}</span>
+          </span>
         </div>
       </div>
     </div>

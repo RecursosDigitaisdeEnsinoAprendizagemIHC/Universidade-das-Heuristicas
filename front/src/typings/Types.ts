@@ -4,7 +4,7 @@ export interface JogadorInterface {
   pontuacaoTotal: number
   questoesCertas: number
   questoesTentadas: number
-  porcetagem: string
+  porcentagem?: string
   imagemPersonagem: string
 }
 

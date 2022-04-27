@@ -87,7 +87,6 @@ const FASE_INFINITA = -1
 export default defineComponent({
   components: { PerguntaBox, Pergunta, Typewriter, SubHeader, ScoreCard },
   name: 'Fases',
-
   setup() {
     const text = `Aqui você pode avaliar os projetos!\
     A cada projeto respondido corretamente você pode avançar pro próximo! Boa sorte e bons estudos!!`
@@ -107,7 +106,7 @@ export default defineComponent({
     if (jogador == null) {
       jogador = store.getters.getJogador()
       if (!jogador) {
-        return router.push({ name: 'Home' })
+        router.push({ name: 'Home' })
       }
 
       store.commit({ type: 'setJogador', payload: { ...jogador } })

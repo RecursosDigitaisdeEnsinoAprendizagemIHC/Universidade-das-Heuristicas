@@ -28,7 +28,7 @@ export default defineComponent({
       columnDefs: [
         { headerName: 'Nome', field: 'nome', sortable: true },
         { headerName: 'Pontos', field: 'pontuacaoTotal', sortable: true },
-        { headerName: 'Questões', field: 'porcetagem', sortable: true },
+        { headerName: 'Questões', field: 'porcentagem', sortable: true },
       ],
       rowData,
       defaultColDef: {
@@ -47,7 +47,7 @@ export default defineComponent({
 
         porcentagem = isNaN(porcentagem) ? 0 : porcentagem
 
-        aluno.porcetagem = `${porcentagem.toFixed(2)}%`
+        aluno.porcentagem = `${porcentagem.toFixed(2)}%`
       })
       rowData.value = alunos
     })
