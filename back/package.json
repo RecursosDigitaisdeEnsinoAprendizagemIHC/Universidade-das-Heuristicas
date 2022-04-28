@@ -2,9 +2,12 @@
   "name": "heuristica-back",
   "version": "1.0.0",
   "description": "",
+  "main": "build/main.js",
   "scripts": {
+    "start": "node build/main.js",
     "dev": "nodemon --watch './**/*.ts' --exec 'clear;ts-node' main.ts",
     "build": "rm -rf ./build && tsc --build",
+    "postinstall": "npm run build",
     "build:run": "rm -rf ./build && tsc --build && node ./build/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typeorm": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.json",
@@ -14,13 +17,13 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "express": "^4.17.1",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.38",
-    "winston": "^3.3.3",
-    "express": "^4.17.1",
-    "cors": "^2.8.5"
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

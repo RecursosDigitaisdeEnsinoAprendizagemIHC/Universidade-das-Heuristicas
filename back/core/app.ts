@@ -1,7 +1,11 @@
 import express from 'express';
-import cors from "cors";
+import cors, { CorsOptions } from "cors";
 
 export const app = express();
+
+const corsOptions: CorsOptions = {
+  origin: ["*"],
+}
 
 app.use(cors());
 app.use(express.json())
