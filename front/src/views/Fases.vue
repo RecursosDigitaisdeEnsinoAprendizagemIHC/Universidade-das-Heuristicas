@@ -37,7 +37,9 @@
               <h3 class="mb-10">
                 <strong>{{ currentFase.nome }}</strong>
               </h3>
-              <p class="grow text-blue-800">{{ currentFase.descricao }}</p>
+              <p class="grow text-blue-800 break-line">
+                {{ currentFase.descricao }}
+              </p>
               <button
                 class="
                   mt-20
@@ -192,6 +194,10 @@ export default defineComponent({
 <style scoped lang="postcss">
 .bg {
   background-image: url('../assets/imgs/fases-bg.png');
+}
+
+.break-line {
+  white-space: pre-wrap;
 }
 
 .pergunta-scroll {

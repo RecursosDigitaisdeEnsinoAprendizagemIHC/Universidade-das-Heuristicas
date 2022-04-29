@@ -11,8 +11,7 @@
         />
       </div>
       <div class="bg-white white-bg">
-        <!-- TODO  SPEED 70 -->
-        <type-writer :speed="10" :text="text" :goTo="'/fases'"></type-writer>
+        <type-writer :speed="70" :text="text" :goTo="'/fases'"></type-writer>
       </div>
     </div>
   </div>
