@@ -23,7 +23,7 @@ export default defineComponent({
   name: 'GameWelcome',
 
   setup() {
-    const text = `Bem vindo ao seu primeiro desafio! Estamos na UnB e aqui você verá os primeiro projetos para avaliar.\
+    const text = `Bem vindo ao seu primeiro desafio! Estamos na UnB e aqui você verá os primeiros projetos para avaliar.\
     A medida que sua pontuação aumentar mais desafiador vai ficar! Boa sorte e bons estudos!`
 
     return { text }

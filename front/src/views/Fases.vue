@@ -91,7 +91,7 @@ export default defineComponent({
   name: 'Fases',
   setup() {
     const text = `Aqui você pode avaliar os projetos!\
-    A cada projeto respondido corretamente você pode avançar pro próximo! Boa sorte e bons estudos!!`
+    A cada projeto respondido corretamente você pode avançar para o próximo! Boa sorte e bons estudos!!`
 
     const fasesList = ref<FasesInterface[]>([])
     const store = useStore()
