@@ -40,6 +40,7 @@ import { defineComponent, onUpdated, ref } from '@vue/runtime-core'
 import { useStore } from '../store/index'
 import { useRouter, useRoute } from 'vue-router'
 import { directive } from 'vue-tippy'
+import { useToast } from 'vue-toast-notification'
 
 export default defineComponent({
   name: 'AvatarPopUp',
@@ -56,6 +57,7 @@ export default defineComponent({
   setup(props) {
     const store = useStore()
     const router = useRouter()
+    const $toast = useToast();
 
     const popUp = ref<HTMLElement | null>(null)
     const avatarF = ref<HTMLElement | null>(null)
@@ -81,17 +83,28 @@ export default defineComponent({
     }
 
     const confirmar = () => {
-      if (!nomeParticipante.value || !avatar.value) {
-        // TODO - msg de error, colocar no canto direto superior
-        console.log('Error')
+      if (!nomeParticipante.value ) {
+        $toast.error('Deve adicionar um apelido',{
+          position: 'top-right'
+        })
+        return false
+      }
+      if (!avatar.value ) {
+        $toast.error('Deve selecionar um avatar',{
+          position: 'top-right'
+        })
         return false
       }
       const participante = {
         avatar: avatar.value,
         nome: nomeParticipante.value,
       }
+
       if (store.getters.getJogador() == null) {
         store.dispatch({ type: 'criarParticipante', ...participante })
+        $toast.success('Usuário criado com sucesso!',{
+          position: 'top-right'
+        });
         router.push('/game-welcome')
       }
     }

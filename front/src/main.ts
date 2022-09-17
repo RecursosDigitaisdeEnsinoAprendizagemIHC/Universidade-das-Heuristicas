@@ -5,7 +5,9 @@ import router from "./router";
 import { store, key } from "./store/index";
 import Typewriter from './components/Typewriter.vue'
 import SubHeader from './components/SubHeader.vue';
+import ToastPlugin from 'vue-toast-notification';
 
+import 'vue-toast-notification/dist/theme-sugar.css';
 import './plugins/font-awesome'
 
 import './assets/style.scss'
@@ -24,6 +26,9 @@ setDefaultProps({
 const app = createApp(App)
 app.use(store, key).use(router)
 
+app.use(ToastPlugin, {
+    position: 'top'
+});
 app.use(
   VueTippy,
   // optional
