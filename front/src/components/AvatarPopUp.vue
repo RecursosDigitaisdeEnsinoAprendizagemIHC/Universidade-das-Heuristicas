@@ -14,14 +14,14 @@
         maxlength="3"
       />
       <div class="flex justify-around mt-4 mb-8">
-        <img
+        <img  v-tippy="{ content: 'Selecionar personagem' }"
           src="../assets/imgs/avatar-feminino.png"
           alt="avatar-feminino"
           ref="avatarF"
           class="img-avatar"
           @click="trocaAvatar('F', $event)"
         />
-        <img
+        <img v-tippy="{ content: 'Selecionar personagem' }"
           src="../assets/imgs/avatar-masculino.png"
           alt="avatar-masculino"
           ref="avatarM"
@@ -30,7 +30,7 @@
         />
       </div>
 
-      <button class="btn btn-blue" @click="confirmar">Confirmar</button>
+      <button v-tippy="{ content: 'Confirmar cadastro' }" class="btn btn-blue" @click="confirmar">Confirmar</button>
     </div>
   </div>
 </template>
@@ -39,9 +39,13 @@
 import { defineComponent, onUpdated, ref } from '@vue/runtime-core'
 import { useStore } from '../store/index'
 import { useRouter, useRoute } from 'vue-router'
+import { directive } from 'vue-tippy'
 
 export default defineComponent({
   name: 'AvatarPopUp',
+  directives: {
+      tippy: directive,
+  },
   props: {
     jogar: {
       type: Boolean,

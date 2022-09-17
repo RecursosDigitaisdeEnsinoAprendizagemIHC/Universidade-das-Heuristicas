@@ -10,18 +10,24 @@
           srcset=""
         />
       </div>
-      <div class="bg-white white-bg">
-        <type-writer :speed="70" :text="text" :goTo="'/fases'"></type-writer>
+      <div  class="bg-white white-bg">
+        <type-writer :speed="30" :text="text"></type-writer>
+        <br/>
+        <br/>
+        <button v-tippy="{ content: 'Ir para fases' }" class="btn" @click="$router.push('/fases')">Continuar</button>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from '@vue/runtime-core'
+import { directive } from 'vue-tippy'
 
 export default defineComponent({
   name: 'GameWelcome',
-
+  directives: {
+      tippy: directive,
+  },
   setup() {
     const text = `Bem vindo ao seu primeiro desafio! Estamos na UnB e aqui você verá os primeiros projetos para avaliar.\
     A medida que sua pontuação aumentar mais desafiador vai ficar! Boa sorte e bons estudos!`
@@ -30,4 +36,12 @@ export default defineComponent({
   },
 })
 </script>
-<style scoped lang="postcss"></style>
+<style scoped lang="postcss">
+.btn {
+  @apply font-bold py-2 px-4 rounded bg-blue-800 text-white;
+}
+.btn:hover {
+  opacity: 0.5;
+}
+
+</style>
