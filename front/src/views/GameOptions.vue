@@ -3,13 +3,13 @@
 
   <div class="container h-full">
     <div class="flex w-full justify-around h-1/4 space-x-20">
-      <div class="bg-option" @click="openPopUp">
+      <div  v-tippy="{ content: 'Iniciar partida' }" class="bg-option" @click="openPopUp">
         <p>Jogar</p>
       </div>
-      <div class="bg-option" @click="$router.push('/ranking')">
+      <div v-tippy="{ content: 'Visualizar ranking' }" class="bg-option" @click="$router.push('/ranking')">
         <p>Ranking</p>
       </div>
-      <div class="bg-option" @click="$router.push('/sobre-nos')">
+      <div v-tippy="{ content: 'Sobre os desenvolvedores' }" class="bg-option" @click="$router.push('/sobre-nos')">
         <p>Sobre<br />Nós</p>
       </div>
     </div>
@@ -20,10 +20,14 @@
 import { defineComponent, ref } from '@vue/runtime-core'
 import AvatarPopUp from '../components/AvatarPopUp.vue'
 import { useStore } from '../store/index'
+import { directive } from 'vue-tippy'
 
 export default defineComponent({
   components: { AvatarPopUp },
   name: 'GameOptions',
+  directives: {
+      tippy: directive,
+  },
   setup() {
     const store = useStore()
     const isJogar = ref<boolean>(false)

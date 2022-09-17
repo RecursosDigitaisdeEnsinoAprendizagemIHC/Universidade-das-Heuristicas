@@ -18,5 +18,8 @@ export default defineConfig({
   //     },
   //   },
   // },
+  build: {commonjsOptions: {
+    esmExternals: true 
+ },},
   plugins: [vue()]
 })

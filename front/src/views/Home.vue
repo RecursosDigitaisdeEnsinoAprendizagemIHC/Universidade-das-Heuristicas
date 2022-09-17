@@ -2,7 +2,8 @@
   <div class="container h-full">
     <h1 class="title mb-20">Universidade das Heurísticas</h1>
     <div class="flex items-center justify-around w-full">
-      <div>
+    <button v-tippy="{ content: 'Hi!' }">Tippy!</button>
+      <div  v-tippy="{ content: 'Hi!' }">
         <img
           src="../assets/imgs/home-page-image.png"
           alt="placeholder"
@@ -30,17 +31,24 @@
 import { computed, ref, defineComponent } from '@vue/runtime-core'
 import Layout from '../layouts/layout.vue'
 import { useStore } from '../store'
+import { directive } from 'vue-tippy'
 
 export default defineComponent({
   name: 'App',
   components: { Layout },
+  directives: {
+      tippy: directive,
+  },
+
   setup() {
     const list = ref<string[]>(['a', 'b'])
     const store = useStore()
 
     store.dispatch({ type: 'setJogadorNull' })
+
     return {
       list,
+
     }
   },
 })

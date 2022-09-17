@@ -13,11 +13,31 @@ import AvatarPopUp from './components/AvatarPopUp.vue';
 import ScoreCard from './components/ScoreCard.vue';
 import Pergunta from './components/Pergunta.vue';
 import PerguntaBox from './components/PerguntaBox.vue';
+import { plugin as VueTippy } from 'vue-tippy'
+import 'tippy.js/dist/tippy.css' 
+import { setDefaultProps } from 'vue-tippy'
+
+setDefaultProps({
+  placement: 'right',
+})
 
 const app = createApp(App)
 app.use(store, key).use(router)
 
-
+app.use(
+  VueTippy,
+  // optional
+  {
+    directive: 'tippy', // => v-tippy
+    component: 'tippy', // => <tippy/>
+    componentSingleton: 'tippy-singleton', // => <tippy-singleton/>,
+    defaultProps: {
+      placement: 'bottom',
+      allowHTML: true,
+      arrow: false
+    }, // => Global default options * see all props
+  }
+)
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.component('type-writer', Typewriter)
 app.component('sub-header', SubHeader)
