@@ -18,12 +18,14 @@
           src="../assets/imgs/avatar-feminino.png"
           alt="avatar-feminino"
           ref="avatarF"
+          class="img-avatar"
           @click="trocaAvatar('F', $event)"
         />
         <img
           src="../assets/imgs/avatar-masculino.png"
           alt="avatar-masculino"
           ref="avatarM"
+          class="img-avatar"
           @click="trocaAvatar('M', $event)"
         />
       </div>
@@ -108,8 +110,10 @@ export default defineComponent({
 
 img:hover {
   cursor: pointer;
+  opacity: 0.5;
+  border: solid 3px #000080;
 }
 img.selected {
-  @apply border border-blue-800;
+  border: solid 3px #000080;
 }
 </style>

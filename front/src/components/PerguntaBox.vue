@@ -8,7 +8,7 @@
     />
     <div class="pergunta ml-5 mr-2 grow">
       <div class="float-right ml-2 cursor-pointer" @click="goToFases">
-        <font-awesome-icon icon="times-circle" size="2x" class="text-red-800" />
+        <font-awesome-icon icon="times-circle" size="2x" class="text-red-800 btn-close" />
       </div>
       <slot></slot>
     </div>
@@ -69,5 +69,9 @@ export default defineComponent({
 
   left: 32px;
   bottom: -45px;
+}
+
+.btn-close:hover {
+  opacity: 0.4;
 }
 </style>

@@ -285,4 +285,12 @@ export default defineComponent({
   width: 70%;
   margin: 0 auto;
 }
+
+.mt-5:hover{
+  opacity: 0.4;
+}
+
+.mt-20:hover {
+  opacity: 0.4;
+}
 </style>

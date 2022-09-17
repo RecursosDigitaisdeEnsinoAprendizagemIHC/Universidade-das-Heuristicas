@@ -18,14 +18,14 @@
                 src="../assets/imgs/open-project.png"
                 alt="open-project"
                 srcset=""
-                class="w-10/12 m-auto md:w-3/4"
+                class="w-10/12 m-auto md:w-3/4 fase-habilitada"
               />
               <img
                 v-if="jogador && jogador.pontuacaoTotal < fase.minPontuacao"
                 src="../assets/imgs/closed-project.png"
                 alt="closed-project"
                 srcset=""
-                class="w-10/12 m-auto m-auto md:w-3/4"
+                class="w-10/12 m-auto m-auto md:w-3/4 fase-desabilitada"
               />
             </div>
           </div>
@@ -208,5 +208,17 @@ export default defineComponent({
 .rectangle {
   @apply border-opacity-100 border-8 border-blue-800 rounded-3xl;
   @apply bg-white;
+}
+
+.fase-habilitada:hover{
+  opacity: 0.4;
+}
+
+.fase-desabilitada{
+  opacity: 0.5;
+}
+
+.mt-20:hover{
+  opacity: 0.4;
 }
 </style>

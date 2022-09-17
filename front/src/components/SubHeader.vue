@@ -11,7 +11,7 @@
   </p>
   <div
     v-if="hideVoltar == false"
-    class="mt-5 cursor-pointer flex items-center"
+    class="mt-5 cursor-pointer flex items-center :hover{@apply bg-red-700}"
     @click="$router.go(-1)"
   >
     <font-awesome-icon
@@ -59,3 +59,13 @@ export default defineComponent({
   },
 })
 </script>
+
+<style scoped lang="postcss">
+.mt-5:hover {
+  opacity: 0.25;
+}
+.underline:hover{
+  opacity: 0.4;
+}
+
+</style>
