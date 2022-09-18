@@ -83,6 +83,7 @@ import Typewriter from '../components/Typewriter.vue'
 import { useStore } from '../store/index'
 import { FasesInterface, PerguntaInterface } from '../typings/Types'
 import { shuffleArray } from '../utils/Utils'
+import { useToast } from 'vue-toast-notification'
 
 const FASE_INFINITA = -1
 
@@ -96,6 +97,7 @@ export default defineComponent({
     const fasesList = ref<FasesInterface[]>([])
     const store = useStore()
     const router = useRouter()
+    const $toast = useToast();
     const isPergunta = ref<boolean>(false)
     const currentFase = ref<FasesInterface | any>({})
     const faseIntro = ref<boolean>(false)
@@ -138,6 +140,9 @@ export default defineComponent({
     }
 
     const setPerguntas = (_perguntas: PerguntaInterface[]) => {
+      $toast.success('Fase Iniciada!',{
+        position: 'top-right'
+      })
       perguntas.value = [...shuffleArray(_perguntas)]
       nextPergunta()
     }
