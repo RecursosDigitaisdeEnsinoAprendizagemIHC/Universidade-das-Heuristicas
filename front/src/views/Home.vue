@@ -2,8 +2,7 @@
   <div class="container h-full">
     <h1 class="title mb-20">Universidade das Heurísticas</h1>
     <div class="flex items-center justify-around w-full">
-    <button v-tippy="{ content: 'Hi!' }">Tippy!</button>
-      <div  v-tippy="{ content: 'Hi!' }">
+      <div>
         <img
           src="../assets/imgs/home-page-image.png"
           alt="placeholder"

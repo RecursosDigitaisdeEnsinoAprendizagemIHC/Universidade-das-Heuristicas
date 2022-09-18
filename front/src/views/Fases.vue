@@ -1,5 +1,5 @@
 <template>
-  <sub-header :hideVoltar="true" :showLinks="true"></sub-header>
+  <sub-header v-on:openModal="openModal" :hideVoltar="true" :showLinks="true"></sub-header>
 
   <div class="container h-full">
     <div class="flex flex-col w-full">
@@ -69,6 +69,7 @@
         <type-writer :speed="70" :text="text"></type-writer>
       </div>
     </div>
+    <modal-confirmacao v-on:closeModal="closeModal"  :open="isOpenModal"></modal-confirmacao>
   </div>
 </template>
 <script lang="ts">
@@ -80,6 +81,7 @@ import PerguntaBox from '../components/PerguntaBox.vue'
 import ScoreCard from '../components/ScoreCard.vue'
 import SubHeader from '../components/SubHeader.vue'
 import Typewriter from '../components/Typewriter.vue'
+import ModalConfirmacao from '../components/ModalConfirmation.vue'
 import { useStore } from '../store/index'
 import { FasesInterface, PerguntaInterface } from '../typings/Types'
 import { shuffleArray } from '../utils/Utils'
@@ -88,7 +90,7 @@ import { useToast } from 'vue-toast-notification'
 const FASE_INFINITA = -1
 
 export default defineComponent({
-  components: { PerguntaBox, Pergunta, Typewriter, SubHeader, ScoreCard },
+  components: { PerguntaBox, Pergunta, Typewriter, SubHeader, ScoreCard, ModalConfirmacao},
   name: 'Fases',
   setup() {
     const text = `Aqui você pode avaliar os projetos!\
@@ -102,6 +104,7 @@ export default defineComponent({
     const currentFase = ref<FasesInterface | any>({})
     const faseIntro = ref<boolean>(false)
     const faseStart = ref<boolean>(false)
+    const isOpenModal = ref<boolean>(false)
 
     const currentPergunta = ref<PerguntaInterface>()
     const perguntas = ref<PerguntaInterface[]>([])
@@ -145,6 +148,14 @@ export default defineComponent({
       })
       perguntas.value = [...shuffleArray(_perguntas)]
       nextPergunta()
+    }
+
+    const openModal = () => {
+      isOpenModal.value = true
+    }
+
+    const closeModal = () => {
+      isOpenModal.value = false
     }
 
     const nextPergunta = () => {
@@ -192,6 +203,9 @@ export default defineComponent({
       setPerguntas,
       nextPergunta,
       close,
+      openModal,
+      isOpenModal,
+      closeModal
     }
   },
 })

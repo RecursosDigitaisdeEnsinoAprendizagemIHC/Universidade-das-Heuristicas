@@ -3,9 +3,9 @@
     Universidade das Heurísticas{{ subTitle }}
     <span v-if="showLinks == true">
       |
-      <router-link to="/ranking" class="underline">Ranking</router-link>
+      <router-link to="/ranking" class="underline" @click="openModal">Ranking</router-link>
       -
-      <router-link to="/" class="underline">Novo Jogo</router-link>
+      <button class="underline" @click="$emit('openModal')">Novo Jogo</button>
       |
     </span>
   </p>
@@ -50,11 +50,13 @@ export default defineComponent({
     const subTitle = props.title ? ` - ${props.title}` : ''
     const hideVoltar = props.hideVoltar
     const showLinks = props.showLinks
+    const isOpenModal = ref<boolean>(false)
 
     return {
       subTitle,
       hideVoltar,
       showLinks,
+      isOpenModal
     }
   },
 })

@@ -15,6 +15,7 @@ import AvatarPopUp from './components/AvatarPopUp.vue';
 import ScoreCard from './components/ScoreCard.vue';
 import Pergunta from './components/Pergunta.vue';
 import PerguntaBox from './components/PerguntaBox.vue';
+import ModalConfirmation from './components/ModalConfirmation.vue';
 import { plugin as VueTippy } from 'vue-tippy'
 import 'tippy.js/dist/tippy.css' 
 import { setDefaultProps } from 'vue-tippy'
@@ -47,6 +48,7 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 app.component('type-writer', Typewriter)
 app.component('sub-header', SubHeader)
 app.component('avatar-pop-up', AvatarPopUp)
+app.component('modal-confirmacao', ModalConfirmation)
 app.component('score-card', ScoreCard)
 app.component('pergunta-box', PerguntaBox)
 app.component('pergunta', Pergunta)
