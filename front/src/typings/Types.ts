@@ -6,8 +6,13 @@ export interface JogadorInterface {
   questoesTentadas: number
   porcentagem?: string
   imagemPersonagem: string
+
 }
 
+export interface ErrorInterface {
+  message: string
+  code: string
+}
 export interface FasesInterface {
   idFase: number
   nome: string
