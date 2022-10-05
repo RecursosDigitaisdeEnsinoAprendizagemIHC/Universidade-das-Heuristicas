@@ -13,17 +13,19 @@
         <p>Sobre<br />Nós</p>
       </div>
     </div>
+    <modal-error v-on:closeModal="closeModal" :open="isError" :message="'store.state.error'" :code="'teste wee'"></modal-error>
     <avatar-pop-up :jogar="isJogar"></avatar-pop-up>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from '@vue/runtime-core'
 import AvatarPopUp from '../components/AvatarPopUp.vue'
+import ModalError from '../components/ModalError.vue'
 import { useStore } from '../store/index'
 import { directive } from 'vue-tippy'
 
 export default defineComponent({
-  components: { AvatarPopUp },
+  components: { AvatarPopUp, ModalError },
   name: 'GameOptions',
   directives: {
       tippy: directive,
@@ -31,12 +33,23 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const isJogar = ref<boolean>(false)
-
+    const isError = ref<boolean>(false)
     const openPopUp = () => {
       isJogar.value = true
     }
 
-    return { isJogar, openPopUp }
+    const closeModal = () => {
+      console.log('error')
+      isError.value = false
+      store.dispatch({ type: 'setError', payload: null })
+    }
+    console.log('teste', store.state.error)
+    if(store.state.error !== null){
+      
+      isError.value = true
+    }
+    console.log(store.state)
+    return { isJogar, openPopUp, isError, store, closeModal }
   },
 })
 </script>

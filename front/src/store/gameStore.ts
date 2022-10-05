@@ -1,7 +1,7 @@
 import { ActionContext, ActionPayload, GetterTree, MutationPayload } from 'vuex';
 import apiClient from '../plugins/https';
 import { getJogadorLocalStorage, setJogadorLocalStorage } from '../utils/Utils';
-import { FasesInterface, JogadorInterface } from './../typings/Types';
+import { FasesInterface, JogadorInterface, ErrorInterface } from './../typings/Types';
 import { State } from './index';
 
 
@@ -11,7 +11,8 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
   state: {
     jogador: null,
     fases: [],
-    currentFase: null
+    currentFase: null,
+    error: null
   },
   getters: {
     getJogador: (state) => () => {
@@ -49,6 +50,10 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
       commit({ type: 'setCurrentFase', payload })
     },
 
+    async setError({ commit, state }: ActionContext<State, State>, { payload }: any): Promise<void> {
+      console.log('moacir', payload)
+      commit({ type: 'setError', payload })
+    },
     async addPontuacao({ commit, state, getters }: ActionContext<State, State>, { payload }: ActionPayload): Promise<void> {
       const jogador = state.jogador as JogadorInterface
 
@@ -92,8 +97,10 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
         const code = err?.response?.data?.error?.code ?? 500;
         const message = err?.response?.data?.error?.message ?? 'Erro ao criar usuário.';
         const response = { message, code}
+        console.log('response', response)
         commit({ type: 'setError', response })
         commit({ type: 'setJogadorNull' })
+        console.log('eae', state.error)
       }
     },
     setJogadorNull({ commit, state }: ActionContext<State, State>) {
@@ -126,8 +133,11 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
     setJogadorNull(state: State, payload: MutationPayload) {
       state.jogador = null
     },
-    setError(state: State, payload: MutationPayload) {
-      state.error = { ...payload.payload }
+    setError(state: State, payload: any) {
+      
+
+      // const {response} = payload
+      payload.response ? state.error = payload.response : state.error = null
     },
   },
 }

@@ -7,7 +7,7 @@ export interface State {
   jogador: JogadorInterface | null
   currentFase: any | null
   fases: FasesInterface[]
-  error?: ErrorInterface
+  error?: ErrorInterface | null
 }
 
 export const key: InjectionKey<Store<State>> = Symbol()

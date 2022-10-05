@@ -110,6 +110,6 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     justify-content: start;
-    padding-bottom: 48px
+    padding-bottom: 48px;
 }
 </style>
