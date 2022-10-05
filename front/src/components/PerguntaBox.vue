@@ -27,7 +27,6 @@ export default defineComponent({
     const router = useRouter()
 
     const goToFases = () => {
-      console.log('asaas')
       emit('close')
     }
 

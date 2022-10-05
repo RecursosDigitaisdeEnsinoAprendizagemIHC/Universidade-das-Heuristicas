@@ -35,6 +35,7 @@ export default defineComponent({
     return { text }
   },
 })
+
 </script>
 <style scoped lang="postcss">
 .btn {

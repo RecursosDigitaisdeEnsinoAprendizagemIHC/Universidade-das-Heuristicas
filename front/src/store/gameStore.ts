@@ -19,15 +19,30 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
     }
   },
   actions: {
-    async getRankingList({ commit, state }: ActionContext<State, State>): Promise<JogadorInterface[]> {
-      const result = await apiClient.get<JogadorInterface[]>('/ranking-list')
-      return result.data
+    async getRankingList({ commit, state }: ActionContext<State, State>): Promise<JogadorInterface[] | undefined> {
+      try {
+        const result = await apiClient.get<JogadorInterface[]>('/ranking-list')
+        return result.data
+      } catch (err: any) {
+        const code = err?.response?.data?.error?.code ?? 500;
+        const message = err?.response?.data?.error?.message ?? 'Erro ao listar ranking.';
+        const response = { message, code}
+        commit({ type: 'setError', response })
+      }
+
     },
-    async getFases({ commit, state }: ActionContext<State, State>): Promise<FasesInterface[]> {
-      const result = await apiClient.get<FasesInterface[]>('/get-fases')
-      const fases = result.data
-      commit({ type: 'setFase', fases })
-      return result.data
+    async getFases({ commit, state }: ActionContext<State, State>): Promise<FasesInterface[] | undefined> {
+      try {
+        const result = await apiClient.get<FasesInterface[]>('/get-fases')
+        const fases = result.data
+        commit({ type: 'setFase', fases })
+        return result.data
+      } catch (err: any) {
+        const code = err?.response?.data?.error?.code ?? 500;
+        const message = err?.response?.data?.error?.message ?? 'Erro ao buscar Fases.';
+        const response = { message, code}
+        commit({ type: 'setError', response })
+      }
     },
 
     async setCurrentFase({ commit, state }: ActionContext<State, State>, { payload }: ActionPayload): Promise<void> {
@@ -46,7 +61,14 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
 
 
       setJogadorLocalStorage(jogador)
-      await apiClient.post('/update-score', jogador)
+      try {
+        await apiClient.post('/update-score', jogador)
+      } catch (err: any) {
+        const code = err?.response?.data?.error?.code ?? 500;
+        const message = err?.response?.data?.error?.message ?? 'Erro ao atualizar pontuação do jogador.';
+        const response = { message, code}
+        commit({ type: 'setError', response })
+      }
     },
 
     async criarParticipante({ commit, state }: ActionContext<State, State>, payload: { nome: string, avatar: string }) {
@@ -66,10 +88,13 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
           commit({ type: 'criarParticipante', ...jogador })
           setJogadorLocalStorage(jogador)
         }
-      } catch (error) {
-        throw error
+      } catch (err: any) {
+        const code = err?.response?.data?.error?.code ?? 500;
+        const message = err?.response?.data?.error?.message ?? 'Erro ao criar usuário.';
+        const response = { message, code}
+        commit({ type: 'setError', response })
+        commit({ type: 'setJogadorNull' })
       }
-
     },
     setJogadorNull({ commit, state }: ActionContext<State, State>) {
       localStorage.removeItem(JOGADOR_STORAGE)
@@ -84,7 +109,7 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
         pontuacaoTotal: payload.pontuacaoTotal,
         questoesTentadas: 0,
         questoesCertas: 0,
-        imagemPersonagem: payload.imagemPersonagem
+        imagemPersonagem: payload.imagemPersonagem,
       }
 
     },
@@ -100,6 +125,9 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
     },
     setJogadorNull(state: State, payload: MutationPayload) {
       state.jogador = null
+    },
+    setError(state: State, payload: MutationPayload) {
+      state.error = { ...payload.payload }
     },
   },
 }
