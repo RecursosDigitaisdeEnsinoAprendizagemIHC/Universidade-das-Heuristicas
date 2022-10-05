@@ -2,6 +2,9 @@ import { Jogador } from './../database/entity/Jogador';
 import { Request, Response } from 'express'
 import { getRepository, Repository } from 'typeorm';
 import { Fase } from './../database/entity/Fase';
+import { success } from './helpers/success';
+import { makeResponse } from './helpers/makeResponse';
+import { serverError, updateError } from './helpers/erros';
 
 class Controller {
   jogadorRepository: Repository<Jogador>
@@ -19,9 +22,9 @@ class Controller {
           pontuacaoTotal: 'DESC'
         }
       })
-      res.status(200).json(ranking)
+      return makeResponse(res,success(ranking))
     } catch (error) {
-      res.status(500).json(error)
+      return makeResponse(res,serverError('Erro ao listar ranking.'))
     }
   }
 
@@ -32,9 +35,9 @@ class Controller {
     try {
       user.pontuacaoTotal = 0
       const newJogador = await this.jogadorRepository.create({ ...user }).save()
-      res.json(newJogador)
+      return makeResponse(res, success(newJogador))
     } catch (error) {
-      res.status(500).json(error)
+      return makeResponse(res, serverError('Erro ao criar usuário.'))
     }
   }
 
@@ -45,9 +48,9 @@ class Controller {
           minPontuacao: 'ASC'
         }
       })
-      res.status(200).json(fases)
+      return makeResponse(res, success(fases))
     } catch (error) {
-      res.status(500).json(error)
+      return makeResponse(res, serverError('Erro ao criar buscas fases.'))
     }
   }
 
@@ -63,9 +66,9 @@ class Controller {
 
     try {
       await this.jogadorRepository.update(jogador.idJogador, score)
-      res.json(true)
+      return makeResponse(res, success(true))
     } catch (error) {
-      res.status(500).json(error)
+      return makeResponse(res, updateError('score'))
     }
   }
 }
