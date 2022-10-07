@@ -5,10 +5,10 @@
     hidden
   >
     <div class="m-10">
-      <input
+      <input v-tippy="{ content: 'Apelido pode possuir até 3 caracteres', position: 'top' }"
         type="text"
         name="name"
-        placeholder="Digite seu nome..."
+        placeholder="Insira o apelido"
         class="mt-4"
         v-model="nomeParticipante"
         maxlength="3"
@@ -83,6 +83,7 @@ export default defineComponent({
     }
 
     const confirmar = () => {
+      console.log('Clicou')
       if (!nomeParticipante.value ) {
         $toast.error('Deve adicionar um apelido',{
           position: 'top-right'
@@ -100,11 +101,21 @@ export default defineComponent({
         nome: nomeParticipante.value,
       }
 
+      if(participante.nome.includes(" ")){
+        $toast.error('Apelido inválido. Espaço não é permitido.',{
+          position: 'top-right'
+        })
+        return false
+      }
+      console.log('Jogador: ', store.getters.getJogador())
       if (store.getters.getJogador() == null) {
+        console.log('Sem jogador')
         store.dispatch({ type: 'criarParticipante', ...participante })
         $toast.success('Usuário criado com sucesso!',{
           position: 'top-right'
         });
+
+        console.log('store: ', store);
         router.push('/game-welcome')
       }
     }
