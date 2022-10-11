@@ -2,7 +2,6 @@
   <div
     class="modal-error bg-white border rounded-lg border-blue-800"
     ref="ModalConfirm"
-    hidden
   >
     <div class="m-10">
       <div class="title">
@@ -18,14 +17,14 @@
         <h3>Codigo: {{code}}</h3>
       </div>
       <div class="button-group">
-        <button v-tippy="{ content: 'Fechar mensagem de erro' }" class="btn btn-blue" @click="$emit('closeModal')">Fechar</button>
+        <button v-tippy="{ content: 'Fechar mensagem de erro' }" class="btn btn-blue" @click="CloseModalError">Fechar</button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onUpdated } from '@vue/runtime-core'
+import { defineComponent, ref } from '@vue/runtime-core'
 import { useStore } from '../store/index'
 import { useRouter, useRoute } from 'vue-router'
 import { directive } from 'vue-tippy'
@@ -37,11 +36,6 @@ export default defineComponent({
       tippy: directive,
   },
   props: {
-    open: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
     message: {
       type: String,
       required: true,
@@ -55,26 +49,22 @@ export default defineComponent({
   },
 
   setup(props) {
-
     const store = useStore();
     const router = useRouter();
     const $toast = useToast();
     const ModalConfirm = ref<HTMLElement | null>(null)
     const message = ref<string>(props.message)
     const code = ref<string>(props.code)
-    onUpdated(() => {
-      if ( props.open == true) {
-        ModalConfirm.value.hidden = false
-      }else {
-        ModalConfirm.value.hidden = true
-      }
-    })
 
     const confirmar = () => {
         router.push('/')
     }
 
-    return { ModalConfirm, confirmar, message, code }
+    const CloseModalError = () => {
+      store.dispatch({ type: 'setError', payload: null })
+      router.go(-1)
+    }
+    return { ModalConfirm, confirmar, message, code, CloseModalError }
   },
 })
 </script>

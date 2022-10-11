@@ -1,29 +1,5 @@
 <template>
-  <div class="container h-full">
-    <div
-    class="modal-error bg-white border rounded-lg border-blue-800"
-    ref="ModalConfirm"
-    hidden
-  >
-    <div class="m-10">
-      <div class="title">
-        <img
-            src="../assets/imgs/error.svg"
-            alt="icone de alerta"
-            srcset=""
-        />
-        <h3 class="msg-title">Erro do sistema</h3>
-      </div >
-      <div class="modal-content">
-        <h3>Erro: {{message}}</h3>
-        <h3>Codigo: {{code}}</h3>
-      </div>
-      <div class="button-group">
-        <button v-tippy="{ content: 'Fechar mensagem de erro' }" class="btn btn-blue" @click="$emit('closeModal')">Fechar</button>
-      </div>
-    </div>
-  </div>
-  </div>
+  <modal-error :message="message" :code="code"></modal-error>
 </template>
 <script lang="ts">
 import { computed, ref, defineComponent } from '@vue/runtime-core'

@@ -13,7 +13,6 @@
         <p>Sobre<br />Nós</p>
       </div>
     </div>
-    <modal-error v-on:closeModal="closeModal" :open="isError" :message="'store.state.error'" :code="'teste wee'"></modal-error>
     <avatar-pop-up :jogar="isJogar"></avatar-pop-up>
   </div>
 </template>
