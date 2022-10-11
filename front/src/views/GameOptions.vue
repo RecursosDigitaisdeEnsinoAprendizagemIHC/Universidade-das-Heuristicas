@@ -30,27 +30,37 @@ export default defineComponent({
   directives: {
       tippy: directive,
   },
+  watch: {
+  '$store.state.error': function() {
+    this.$store.state.error
+    // alert(`message: ${this.$store.state.error.message} code: ${this.$store.state.error.code}`)
+    this.$router.push('/alert-view')
+  }
+
+},
+
   setup() {
     const store = useStore()
     const isJogar = ref<boolean>(false)
     const isError = ref<boolean>(false)
+    
     const openPopUp = () => {
       isJogar.value = true
     }
 
+    console.log('Is error: ', isError);
+    const closePopUp = () => {
+      isJogar.value = false
+    }
+
     const closeModal = () => {
       console.log('error')
+      isJogar.value = false
       isError.value = false
-      store.dispatch({ type: 'setError', payload: null })
+      // store.dispatch({ type: 'setError', payload: null })
     }
-    console.log('teste', store.state.error)
-    if(store.state.error !== null){
-      
-      isError.value = true
-    }
-    console.log(store.state)
     return { isJogar, openPopUp, isError, store, closeModal }
-  },
+  }
 })
 </script>
 <style scoped lang="postcss">

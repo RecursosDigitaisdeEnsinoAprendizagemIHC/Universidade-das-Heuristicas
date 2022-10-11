@@ -54,6 +54,8 @@ export default defineComponent({
       default: false,
     },
   },
+
+
   setup(props) {
     const store = useStore()
     const router = useRouter()
@@ -62,7 +64,7 @@ export default defineComponent({
     const popUp = ref<HTMLElement | null>(null)
     const avatarF = ref<HTMLElement | null>(null)
     const avatarM = ref<HTMLElement | null>(null)
-
+    
     const nomeParticipante = ref<string>('')
     const avatar = ref<string>('')
 
@@ -100,6 +102,10 @@ export default defineComponent({
         avatar: avatar.value,
         nome: nomeParticipante.value,
       }
+      console.log('Store: ', store.state.error)
+      if(store.error){
+        alert(`Error: ${store.error}`)
+      }
 
       if(participante.nome.includes(" ")){
         $toast.error('Apelido inválido. Espaço não é permitido.',{
@@ -115,13 +121,19 @@ export default defineComponent({
           position: 'top-right'
         });
 
-        console.log('store: ', store);
-        router.push('/game-welcome')
+        // router.push('/game-welcome')
       }
+
+      
     }
 
     return { nomeParticipante, popUp, avatarF, avatarM, confirmar, trocaAvatar }
   },
+  methods: {
+     onClickButton (event) {
+         this.$emit('clicked', 'true')
+     }
+   }
 })
 </script>
 <style scoped lang="postcss">

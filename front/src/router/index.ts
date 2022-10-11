@@ -5,12 +5,19 @@ import Ranking from '../views/Ranking.vue'
 import About from '../views/About.vue'
 import GameWelcome from '../views/GameWelcome.vue'
 import Fases from '../views/Fases.vue'
+import AlertView from '../views/AlertView.vue'
+
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/alert-view',
+    name: 'AlertView',
+    component: AlertView,
   },
   {
     path: '/ranking',
