@@ -19,6 +19,12 @@ import SubHeader from '../components/SubHeader.vue'
 export default defineComponent({
   name: 'Ranking',
   components: { RankList, SubHeader },
+  watch: {
+  '$store.state.error': function() {
+    this.$store.state.error
+    this.$router.push('/alert-view')
+    }
+  },
   setup() {
     const rankingList = ref<JogadorInterface[]>([])
     const store = useStore()

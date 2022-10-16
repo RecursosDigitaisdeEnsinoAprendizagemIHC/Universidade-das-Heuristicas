@@ -28,6 +28,12 @@ export default defineComponent({
   directives: {
       tippy: directive,
   },
+  watch: {
+  '$store.state.error': function() {
+    this.$store.state.error
+    this.$router.push('/alert-view')
+    }
+  },
   setup() {
     const text = `Bem vindo ao seu primeiro desafio! Estamos na UnB e aqui você verá os primeiros projetos para avaliar.\
     A medida que sua pontuação aumentar mais desafiador vai ficar! Boa sorte e bons estudos!`

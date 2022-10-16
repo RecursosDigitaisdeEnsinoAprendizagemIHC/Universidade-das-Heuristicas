@@ -85,7 +85,6 @@ export default defineComponent({
     }
 
     const confirmar = () => {
-      console.log('Clicou')
       if (!nomeParticipante.value ) {
         $toast.error('Deve adicionar um apelido',{
           position: 'top-right'
@@ -113,15 +112,13 @@ export default defineComponent({
         })
         return false
       }
-      console.log('Jogador: ', store.getters.getJogador())
       if (store.getters.getJogador() == null) {
-        console.log('Sem jogador')
         store.dispatch({ type: 'criarParticipante', ...participante })
         $toast.success('Usuário criado com sucesso!',{
           position: 'top-right'
         });
 
-        // router.push('/game-welcome')
+        router.push('/game-welcome')
       }
 
       

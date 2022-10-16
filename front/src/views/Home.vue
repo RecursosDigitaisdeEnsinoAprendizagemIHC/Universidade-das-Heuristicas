@@ -38,7 +38,12 @@ export default defineComponent({
   directives: {
       tippy: directive,
   },
-
+  watch: {
+    '$store.state.error': function() {
+      this.$store.state.error
+      this.$router.push('/alert-view')
+      }
+  },
   setup() {
     const list = ref<string[]>(['a', 'b'])
     const store = useStore()

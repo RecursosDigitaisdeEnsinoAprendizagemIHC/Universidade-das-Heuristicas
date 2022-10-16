@@ -92,10 +92,14 @@ const FASE_INFINITA = -1
 export default defineComponent({
   components: { PerguntaBox, Pergunta, Typewriter, SubHeader, ScoreCard, ModalConfirmacao},
   name: 'Fases',
+    watch: {
+    '$store.state.error': function() {
+      this.$store.state.error
+      this.$router.push('/alert-view')
+      }
+  },
   setup() {
-    const text = `Aqui você pode avaliar os projetos!\
-    A cada projeto respondido corretamente você pode avançar para o próximo! Boa sorte e bons estudos!!`
-
+    const text = 'Bem vindo a tela de projetos! Clique em um projeto desbloqueado acima e avance para as perguntas. \n A cada projeto respondido corretamente você pode avançar para o próximo! Boa sorte e bons estudos!!'
     const fasesList = ref<FasesInterface[]>([])
     const store = useStore()
     const router = useRouter()

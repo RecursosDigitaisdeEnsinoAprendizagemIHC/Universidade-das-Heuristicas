@@ -13,8 +13,8 @@
         <h3 class="msg-title">Erro do sistema</h3>
       </div >
       <div class="modal-content">
-        <h3>Erro: {{message}}</h3>
-        <h3>Codigo: {{code}}</h3>
+        <h3>Erro: {{code}}</h3>
+        <h3>Mensagem: {{message}}</h3>
       </div>
       <div class="button-group">
         <button v-tippy="{ content: 'Fechar mensagem de erro' }" class="btn btn-blue" @click="CloseModalError">Fechar</button>
@@ -62,7 +62,7 @@ export default defineComponent({
 
     const CloseModalError = () => {
       store.dispatch({ type: 'setError', payload: null })
-      router.go(-1)
+      router.push('game-options')
     }
     return { ModalConfirm, confirmar, message, code, CloseModalError }
   },

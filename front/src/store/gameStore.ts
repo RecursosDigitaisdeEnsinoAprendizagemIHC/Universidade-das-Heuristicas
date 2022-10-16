@@ -97,10 +97,8 @@ export const GameStore: { state: State, getters: GetterTree<State, State>, actio
         const code = err?.response?.data?.error?.code ?? 500;
         const message = err?.response?.data?.error?.message ?? 'Erro ao criar usuário.';
         const response = { message, code}
-        console.log('response', response)
         commit({ type: 'setError', response })
         commit({ type: 'setJogadorNull' })
-        console.log('eae', state.error)
       }
     },
     setJogadorNull({ commit, state }: ActionContext<State, State>) {

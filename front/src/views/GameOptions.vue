@@ -22,6 +22,7 @@ import AvatarPopUp from '../components/AvatarPopUp.vue'
 import ModalError from '../components/ModalError.vue'
 import { useStore } from '../store/index'
 import { directive } from 'vue-tippy'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   components: { AvatarPopUp, ModalError },
@@ -42,21 +43,22 @@ export default defineComponent({
     const store = useStore()
     const isJogar = ref<boolean>(false)
     const isError = ref<boolean>(false)
-    
+    const router = useRouter()
+
     const openPopUp = () => {
+      if (store.getters.getJogador() !== null) {
+        router.push('/game-welcome')
+      }
       isJogar.value = true
     }
-
-    console.log('Is error: ', isError);
     const closePopUp = () => {
+
       isJogar.value = false
     }
 
     const closeModal = () => {
-      console.log('error')
       isJogar.value = false
       isError.value = false
-      // store.dispatch({ type: 'setError', payload: null })
     }
     return { isJogar, openPopUp, isError, store, closeModal }
   }
