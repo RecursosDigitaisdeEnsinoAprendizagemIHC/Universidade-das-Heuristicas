@@ -52,7 +52,7 @@
                 "
                 @click="setPerguntas(currentFase.perguntas)"
               >
-                OK
+                Iniciar
               </button>
             </div>
             <pergunta
