@@ -3,9 +3,9 @@
     Universidade das Heurísticas{{ subTitle }}
     <span v-if="showLinks == true">
       |
-      <router-link to="/ranking" class="underline" @click="openModal">Ranking</router-link>
+      <router-link v-tippy="{ content: 'Visualizar ranking' }" to="/ranking" class="underline" @click="openModal">Ranking</router-link>
       -
-      <button class="underline" @click="$emit('openModal')">Novo Jogo</button>
+      <button v-tippy="{ content: 'Iniciar novo jogo' }" class="underline" @click="$emit('openModal')">Novo Jogo</button>
       |
     </span>
   </p>

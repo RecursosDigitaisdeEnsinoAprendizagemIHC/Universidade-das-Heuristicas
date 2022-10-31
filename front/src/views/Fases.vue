@@ -8,6 +8,7 @@
         <div>
           <div class="flex justify-evenly mb-10" v-show="!faseStart">
             <div
+              v-tippy="{ content: 'Projeto' }"
               v-for="fase of fasesList"
               :key="fase.idFase"
               class="rectangle p-5"
@@ -50,6 +51,7 @@
                   align-bottom
                   self-end
                 "
+                v-tippy="{ content: 'Iniciar questões' }"
                 @click="setPerguntas(currentFase.perguntas)"
               >
                 Iniciar
@@ -231,6 +233,7 @@ export default defineComponent({
 .rectangle {
   @apply border-opacity-100 border-8 border-blue-800 rounded-3xl;
   @apply bg-white;
+  cursor: pointer;
 }
 
 .fase-habilitada:hover{
