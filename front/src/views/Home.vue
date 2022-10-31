@@ -17,6 +17,7 @@
           cursor-pointer
           hover:animate-pulse hover:shadow-xl;
         "
+        v-tippy="{ content: 'Começar novo jogo' }"
       >
         <h1>Começar</h1>
         <div class="pl-4">
